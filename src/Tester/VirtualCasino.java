@@ -1,14 +1,15 @@
 package Tester;
-import login.*;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
-import javax.swing.*;
+import auth.Sigin;
 
 public class VirtualCasino extends JFrame{
-	private loginPanel login = new loginPanel();
+	private Sigin login = new Sigin();
 	
 	public VirtualCasino() {
 		super("Il Casino Virtuale");
-		this.setSize(1200, 700);
+		this.setSize(1600, 900);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
