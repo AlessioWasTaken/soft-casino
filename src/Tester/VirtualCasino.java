@@ -1,11 +1,11 @@
-package Tester;
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
+
+import javax.swing.*;
+import java.awt.*;
 
 import auth.Sigin;
 
 public class VirtualCasino extends JFrame{
-	private Sigin login = new Sigin();
+	private Sigin login = new Sigin();	
 	
 	public VirtualCasino() {
 		super("Il Casino Virtuale");
@@ -19,10 +19,5 @@ public class VirtualCasino extends JFrame{
 	
 	public void createWindow() {
 		this.getContentPane().add(login);
-	}
-	
-	
-	public static void main(String[] args) {
-		new VirtualCasino();
 	}
 }
