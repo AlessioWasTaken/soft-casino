@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 //import slotMachine.SlotMachine;
 
 public class Menu extends JPanel{
+    private VirtualCasino istanza;
 
     JButton home = new JButton("Home");
     JButton shop = new JButton("Shop");
@@ -21,7 +22,8 @@ public class Menu extends JPanel{
     JLabel sectionGiochi = new JLabel("Giochi");
 
 
-    public Menu() {
+    public Menu(VirtualCasino istanza) {
+        this.istanza = istanza;
         setSize(300, 900);
         setLayout(null);
         setBackground(new Color(52, 53 , 53));
@@ -82,5 +84,13 @@ public class Menu extends JPanel{
         blackJack.setFont(new Font("Arial", Font.PLAIN, 20));
         add(blackJack);
 
+        // Action listener
+        home.addActionListener(e -> {
+            istanza.setHome();
+        });
+
+        shop.addActionListener(e -> {
+            istanza.setShop();
+        });
     }
 }

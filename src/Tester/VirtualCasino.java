@@ -10,7 +10,7 @@ import homePage.Home;
 
 public class VirtualCasino extends JFrame{
 	private Signin login = new Signin();
-	private Menu menu = new Menu();	
+	private Menu menu = new Menu(this);	
 	private Shop shop = new Shop();
 	private Home home = new Home();
 	
@@ -26,9 +26,24 @@ public class VirtualCasino extends JFrame{
 	}
 	
 	public void createWindow() {
+
 		//this.getContentPane().add(login);
 		this.getContentPane().add(menu);
-		//this.getContentPane().add(home);
-		//this.getContentPane().add(shop);
+		this.getContentPane().add(home);
+
+		shop.setVisible(false);
+		this.getContentPane().add(shop);
+	}
+
+	public void setHome() {
+		home.setVisible(true);
+		menu.setVisible(true);
+		shop.setVisible(false);
+	}
+
+	public void setShop() {
+		home.setVisible(false);
+		menu.setVisible(true);
+		shop.setVisible(true);
 	}
 }
