@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Tester.*;
 import javax.swing.SwingConstants;
-//import slotMachine.SlotMachine;
+import slotMachine.SlotMachine;
 
 public class Menu extends JPanel{
     private VirtualCasino istanza;
@@ -91,6 +91,18 @@ public class Menu extends JPanel{
 
         shop.addActionListener(e -> {
             istanza.setShop();
+        });
+
+        slotMachine.addActionListener(e -> {
+            istanza.setSlotMachine();
+        });
+
+        corsaCavalli.addActionListener(e -> {
+            istanza.setCorsaCavalli();
+        });
+
+        blackJack.addActionListener(e -> {
+            istanza.setBlackJack();
         });
     }
 }
