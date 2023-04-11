@@ -8,17 +8,18 @@ import java.awt.event.FocusListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import standard.RoundedButton;
 
 public class Shop extends JPanel{
     JLabel welcome = new JLabel("Benevenuto " + "marco.rossi@gmail.com");
     JLabel paymentText = new JLabel("Metodi di Pagamento inseriti");
     JLabel fish = new JLabel(new ImageIcon("assets/Fish.jpg"));
     JTextField fishPrice = new JTextField("Inserire la quantita di fish da acquistare");
-    JButton buyFish = new JButton("Acquista Ora");
+    RoundedButton buyFish = new RoundedButton("Acquista Ora");
 
     public Shop() {
         setSize(1300, 900);

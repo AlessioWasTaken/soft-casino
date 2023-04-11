@@ -3,21 +3,19 @@ package Menu;
 import java.awt.Color;
 import java.awt.Font;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Tester.*;
-import javax.swing.SwingConstants;
-import slotMachine.SlotMachine;
+import standard.RoundedButton;
 
 public class Menu extends JPanel{
     private VirtualCasino istanza;
 
-    JButton home = new JButton("Home");
-    JButton shop = new JButton("Shop");
-    JButton slotMachine = new JButton("Slot Machine");
-    JButton corsaCavalli = new JButton("Corsa Cavalli");
-    JButton blackJack = new JButton("Black Jack");
+    RoundedButton home = new RoundedButton("Home");
+    RoundedButton shop = new RoundedButton("Shop");
+    RoundedButton slotMachine = new RoundedButton("Slot Machine");
+    RoundedButton corsaCavalli = new RoundedButton("Corsa Cavalli");
+    RoundedButton blackJack = new RoundedButton("Black Jack");
 
     JLabel sectionGiochi = new JLabel("Giochi");
 

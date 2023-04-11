@@ -7,10 +7,11 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import standard.RoundedButton;
 
 public class Home extends JPanel{
     private JLabel welcome = new JLabel("Benvenuto " + "mario.rossi@gmail.com");
@@ -19,7 +20,7 @@ public class Home extends JPanel{
     private JTextField dataScadenza = new JTextField("Data Scadenza");
     private JTextField cvv = new JTextField("CVV");
     private JTextField numeroCarta = new JTextField("Numero Carta");
-    private JButton conferma = new JButton("Conferma");
+    private RoundedButton conferma = new RoundedButton("Conferma");
     private JLabel insertedPayment = new JLabel("Metodi di pagamento inseriti: ");
 
     public Home() {

@@ -1,25 +1,27 @@
 package standard;
+
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.*;
 
-public class RoundedButton extends JButton{
-    private int radius;
+public class RoundedButton extends JButton {
+  public RoundedButton(String text) {
+    super(text);
+    setOpaque(false);
+  }
 
-    public RoundedButton() {
-        super();
-        this.radius = 30;
-    }
+  protected void paintComponent(Graphics g) {
+    Graphics2D g2 = (Graphics2D) g.create();
+    g2.setColor(new Color(217, 217 , 217));
+    g2.fillRoundRect(0, 0, getWidth(), getHeight(), 8, 8);
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        //super.paintComponent(g);
-        Dimension arcs = new Dimension(radius, radius);
-        int width = getWidth();
-        int height = getHeight();
+    super.paintComponent(g);
+  }
 
-        //Draws the rounded panel with borders.
-        g.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height);
+  protected void paintBorder(Graphics g) {
+    Graphics2D g2 = (Graphics2D) g.create();
+    g2.setColor(new Color(217, 217 , 217));
+    g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 8, 8);
 
-        g.fillRoundRect(0, 0, width-1, height-1, radius, radius);
-    }
+  }
 }

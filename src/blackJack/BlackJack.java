@@ -3,17 +3,19 @@ package blackJack;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import standard.RoundedButton;
+
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 public class BlackJack extends JPanel{
     private JPanel box = new JPanel();
-    private JButton gioca = new JButton("Gioca");
-    private JButton hit = new JButton("Hit");
-    private JButton stand = new JButton("Stand");
-    private JButton doppia = new JButton("Doppia");
-    private JButton split = new JButton("Split");
+    private RoundedButton gioca = new RoundedButton("Gioca");
+    private RoundedButton hit = new RoundedButton("Hit");
+    private RoundedButton stand = new RoundedButton("Stand");
+    private RoundedButton doppia = new RoundedButton("Doppia");
+    private RoundedButton split = new RoundedButton("Split");
 
     private JTextField puntata = new JTextField("Inserisci la puntata");
     private JLabel saldo = new JLabel("Saldo: ");

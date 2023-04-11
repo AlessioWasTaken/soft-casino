@@ -3,13 +3,15 @@ package slotMachine;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import standard.RoundedButton;
+
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 public class SlotMachine extends JPanel{
     private JPanel box = new JPanel();
-    private JButton gioca = new JButton("Gioca");
+    private RoundedButton gioca = new RoundedButton("Gioca");
     private JTextField puntata = new JTextField("Inserisci la puntata");
     private JLabel saldo = new JLabel("Saldo: ");
     
