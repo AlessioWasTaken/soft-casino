@@ -2,7 +2,6 @@ package shopPage;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -22,7 +21,7 @@ public class Shop extends JPanel{
     RoundedButton buyFish = new RoundedButton("Acquista Ora");
 
     public Shop() {
-        setSize(1300, 900);
+        setSize(1000, 700);
         setLocation(300, 0);
         setLayout(null);
         setBackground(Color.white);
@@ -37,22 +36,22 @@ public class Shop extends JPanel{
         add(welcome);
 
         //Style paymentText label
-        paymentText.setBounds(700, 50, 500, 50);
+        paymentText.setBounds(600, 50, 500, 50);
         paymentText.setFont(new Font("Arial", Font.PLAIN, 20));
         add(paymentText);
         
         //Style fish image
-        fish.setBounds(50, 150, 500, 500);
+        fish.setBounds(50, 150, 350, 350);
         add(fish);
 
         //Style fishPrice textfield
-        fishPrice.setBounds(50, 750, 450, 50);
-        fishPrice.setFont(new Font("Arial", Font.PLAIN, 20));
+        fishPrice.setBounds(50, 540, 300, 50);
+        fishPrice.setFont(new Font("Arial", Font.PLAIN, 15));
         fishPrice.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
         add(fishPrice);
 
         //Style buyFish button
-        buyFish.setBounds(700, 750, 300, 50);
+        buyFish.setBounds(50, 610, 300, 50);
         buyFish.setBackground(new Color(217, 217, 217));
         buyFish.setFont(new Font("Arial", Font.PLAIN, 20));
         buyFish.setBorder(null);

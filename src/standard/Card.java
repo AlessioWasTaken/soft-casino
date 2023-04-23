@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class Card extends RoundedPanel{
     // Formato data scadenda 12/2/23, CVV 123, Numero carta 1234 5678 9012 3456

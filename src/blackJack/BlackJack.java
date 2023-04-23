@@ -21,7 +21,7 @@ public class BlackJack extends JPanel{
     private JLabel saldo = new JLabel("Saldo: ");
     
     public BlackJack(){
-        setSize(1300, 900);
+        setSize(1000, 700);
         setLocation(300, 0);
         setLayout(null);
         setBackground(Color.white);
@@ -31,13 +31,13 @@ public class BlackJack extends JPanel{
 
     private void inizializza() {
         //Style box
-        box.setBounds(50, 20, 1130, 600);
+        box.setBounds(50, 20, 900, 450);
         box.setBackground(new Color(217, 217, 217));
         box.setBorder(new LineBorder(Color.black, 2));
         add(box);
 
         //Style gioca button
-        gioca.setBounds(50, 640, 330, 50);
+        gioca.setBounds(50, 500, 230, 50);
         gioca.setBackground(new Color(217, 217, 217));
         gioca.setForeground(Color.black);
         gioca.setBorder(null);
@@ -46,7 +46,7 @@ public class BlackJack extends JPanel{
         add(gioca);
 
         //Style hit button
-        hit.setBounds(50, 710, 330, 50);
+        hit.setBounds(50, 570, 230, 50);
         hit.setBackground(new Color(217, 217, 217));
         hit.setForeground(Color.black);
         hit.setBorder(null);
@@ -55,14 +55,14 @@ public class BlackJack extends JPanel{
         add(hit);
 
         //Style puntata text field
-        puntata.setBounds(420, 640, 370, 50);
+        puntata.setBounds(290, 500, 230, 50);
         puntata.setForeground(Color.black);
         puntata.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
         puntata.setFont(new Font("Arial", Font.PLAIN, 20));
         add(puntata);
 
         //Style stand button
-        stand.setBounds(420, 710, 300, 50);
+        stand.setBounds(290, 570, 230, 50);
         stand.setBackground(new Color(217, 217, 217));
         stand.setForeground(Color.black);
         stand.setBorder(null);
@@ -71,7 +71,7 @@ public class BlackJack extends JPanel{
         add(stand);
 
         //Style doppia button
-        doppia.setBounds(848, 640, 330, 50);
+        doppia.setBounds(530, 500, 230, 50);
         doppia.setBackground(new Color(217, 217, 217));
         doppia.setForeground(Color.black);
         doppia.setBorder(null);
@@ -80,7 +80,7 @@ public class BlackJack extends JPanel{
         add(doppia);
 
         //Style split button
-        split.setBounds(848, 710, 330, 50);
+        split.setBounds(530, 570, 230, 50);
         split.setBackground(new Color(217, 217, 217));
         split.setForeground(Color.black);
         split.setBorder(null);
@@ -89,7 +89,7 @@ public class BlackJack extends JPanel{
         add(split);
 
         //Style saldo label
-        saldo.setBounds(1090, 780, 330, 20);
+        saldo.setBounds(870, 640, 330, 20);
         saldo.setForeground(Color.black);
         saldo.setFont(new Font("Arial", Font.PLAIN, 15));
         add(saldo);

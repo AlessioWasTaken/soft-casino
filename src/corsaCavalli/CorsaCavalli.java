@@ -17,7 +17,7 @@ public class CorsaCavalli extends JPanel{
     private JLabel saldo = new JLabel("Saldo: ");
     
     public CorsaCavalli(){
-        setSize(1300, 900);
+        setSize(1000, 700);
         setLocation(300, 0);
         setLayout(null);
         setBackground(Color.white);
@@ -27,13 +27,13 @@ public class CorsaCavalli extends JPanel{
 
     private void inizializza() {
         //Style box
-        box.setBounds(50, 20, 1130, 600);
+        box.setBounds(50, 20, 900, 450);
         box.setBackground(new Color(217, 217, 217));
         box.setBorder(new LineBorder(Color.black, 2));
         add(box);
 
         //Style gioca button
-        gioca.setBounds(50, 680, 330, 50);
+        gioca.setBounds(50, 580, 100, 50);
         gioca.setBackground(new Color(217, 217, 217));
         gioca.setForeground(Color.black);
         gioca.setBorder(null);
@@ -42,21 +42,21 @@ public class CorsaCavalli extends JPanel{
         add(gioca);
 
         //Style puntata text field
-        puntata.setBounds(400, 680, 370, 50);
+        puntata.setBounds(160, 580, 370, 50);
         puntata.setForeground(Color.black);
         puntata.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
         puntata.setFont(new Font("Arial", Font.PLAIN, 20));
         add(puntata);
 
         //Style cavallo text field
-        cavallo.setBounds(800, 680, 370, 50);
+        cavallo.setBounds(540, 580, 370, 50);
         cavallo.setForeground(Color.black);
         cavallo.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
         cavallo.setFont(new Font("Arial", Font.PLAIN, 20));
         add(cavallo);
         
         //Style saldo label
-        saldo.setBounds(1090, 780, 330, 20);
+        saldo.setBounds(870, 640, 330, 20);
         saldo.setForeground(Color.black);
         saldo.setFont(new Font("Arial", Font.PLAIN, 15));
         add(saldo);
@@ -97,4 +97,3 @@ public class CorsaCavalli extends JPanel{
         });
     }
 }
-

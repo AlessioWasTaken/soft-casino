@@ -1,8 +1,6 @@
 package Tester;
 
 import javax.swing.*;
-import java.awt.*;
-
 import auth.Signin;
 import shopPage.Shop;
 import Menu.Menu;
@@ -22,7 +20,7 @@ public class VirtualCasino extends JFrame{
 	
 	public VirtualCasino() {
 		super("Il Casino Virtuale");
-		this.setSize(1600, 900);
+		this.setSize(1300, 700);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setResizable(false);
