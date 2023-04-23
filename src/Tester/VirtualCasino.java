@@ -1,7 +1,7 @@
 package Tester;
 
 import javax.swing.*;
-import auth.Signin;
+//import auth.Signin;
 import shopPage.Shop;
 import Menu.Menu;
 import homePage.Home;
@@ -10,7 +10,7 @@ import corsaCavalli.CorsaCavalli;
 import blackJack.BlackJack;
 
 public class VirtualCasino extends JFrame{
-	private Signin login = new Signin();
+	//private Signin login = new Signin();
 	private Menu menu = new Menu(this);	
 	private Shop shop = new Shop();
 	private Home home = new Home();

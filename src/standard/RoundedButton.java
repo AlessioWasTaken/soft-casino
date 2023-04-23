@@ -2,7 +2,6 @@ package standard;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.*;
 
 public class RoundedButton extends JButton {
   public RoundedButton(String text) {
