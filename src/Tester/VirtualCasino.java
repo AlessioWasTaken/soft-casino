@@ -1,8 +1,9 @@
 package Tester;
 
 import javax.swing.*;
-import java.awt.*;
-import auth.Signin;
+
+// Local imports
+import auth.Access;
 import shopPage.Shop;
 import Menu.Menu;
 import homePage.Home;
@@ -11,8 +12,8 @@ import corsaCavalli.CorsaCavalli;
 import blackJack.BlackJack;
 
 public class VirtualCasino extends JFrame{
-	private Signin login = new Signin();
-	private Menu menu = new Menu(this);	
+	private Access access;
+	private Menu menu;	
 	private Shop shop = new Shop();
 	private Home home = new Home();
 	private SlotMachine slotMachine = new SlotMachine();
@@ -21,19 +22,29 @@ public class VirtualCasino extends JFrame{
 	
 	public VirtualCasino() {
 		super("Il Casino Virtuale");
-		this.setSize(1300, 800);
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		this.setResizable(false);
-		this.setLayout(null);
-		createWindow();
-		this.setVisible(true);
+		setSize(1300, 800);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setResizable(false);
+		setLayout(null);
+		init();
+
+		setVisible(true);
 	}
 	
-	public void createWindow() {
+	public void init() {
+		// Aggiunta del pannello di login
+		access = new Access(this);
+		this.getContentPane().add(access);
 
-		this.getContentPane().add(login);
-		//this.getContentPane().add(menu);
+		// Aggiunta del pannello di menu
+		menu = new Menu(this);
+		menu.setVisible(false);
+		this.getContentPane().add(menu);
+
+		// Aggiunta del pannello di home
+		
+		// Aggiunta dei pannelli
 		//this.getContentPane().add(home);
 
 		shop.setVisible(false);
@@ -47,6 +58,12 @@ public class VirtualCasino extends JFrame{
 
 		blackJack.setVisible(false);
 		this.getContentPane().add(blackJack);
+	}
+
+	public void login(){
+		access.setVisible(false);
+		menu.setVisible(true);
+		home.setVisible(true);
 	}
 
 	public void setHome() {

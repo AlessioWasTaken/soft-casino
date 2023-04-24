@@ -2,6 +2,9 @@ package auth;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import Tester.VirtualCasino;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +13,11 @@ import java.awt.event.FocusListener;
 
 import standard.*;
 
-public class Signin extends JPanel {
+public class Access extends JPanel {
+	private VirtualCasino istanceOfApp;
 
-	public Signin() {
+	public Access(VirtualCasino istanceOfApp) {
+		this.istanceOfApp = istanceOfApp;
 		setSize(new Dimension(1300, 800));
 		setBackground(Color.white);
 		setLayout(null);
@@ -224,6 +229,7 @@ public class Signin extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(access.getText().equals("Registrati")) {
+					// TODO Collegare il backend
 					textMode.setText("Metodo di pagamento");
 					nome.setText("Intestatario carta");
 					nomeArea.setText("Intestatario carta");
@@ -239,6 +245,7 @@ public class Signin extends JPanel {
 					// TODO Collegare il backend
 				}else{
 					// TODO Collegare il backend
+					istanceOfApp.login();
 				}
 			}
 		});
