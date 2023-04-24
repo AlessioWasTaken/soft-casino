@@ -142,5 +142,12 @@ public class Menu extends JPanel{
         });
 
     
+        corsaCavalli.addActionListener(e -> {
+            istanza.setCorsaCavalli();
+        });
+
+        blackJack.addActionListener(e -> {
+            istanza.setBlackJack();
+        });
     }
 }

@@ -1,116 +1,99 @@
 package blackJack;
 
+import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-
-import standard.RoundedButton;
-
-import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 public class BlackJack extends JPanel{
-    private JPanel box = new JPanel();
-    private RoundedButton gioca = new RoundedButton("Gioca");
-    private RoundedButton hit = new RoundedButton("Hit");
-    private RoundedButton stand = new RoundedButton("Stand");
-    private RoundedButton doppia = new RoundedButton("Doppia");
-    private RoundedButton split = new RoundedButton("Split");
-
-    private JTextField puntata = new JTextField("Inserisci la puntata");
-    private JLabel saldo = new JLabel("Saldo: ");
     
-    public BlackJack(){
-        setSize(1000, 700);
-        setLocation(300, 0);
+    public BlackJack() {
+        setSize(1050, 800);
+        setLocation(250, 0);
         setLayout(null);
         setBackground(Color.white);
 
-        inizializza();
+        init();
     }
 
-    private void inizializza() {
-        //Style box
-        box.setBounds(50, 20, 900, 450);
-        box.setBackground(new Color(217, 217, 217));
-        box.setBorder(new LineBorder(Color.black, 2));
-        add(box);
+    private void init() {
+        // Game area
+        JPanel gameArea = new JPanel();
+        gameArea.setBounds(0, 0, 1050, 600);
+        gameArea.setLayout(null);
+        gameArea.setBackground(new Color(21, 25, 28));
+        add(gameArea);
 
-        //Style gioca button
-        gioca.setBounds(50, 500, 230, 50);
-        gioca.setBackground(new Color(217, 217, 217));
-        gioca.setForeground(Color.black);
-        gioca.setBorder(null);
-        gioca.setFocusPainted(false);
-        gioca.setFont(new Font("Arial", Font.PLAIN, 20));
-        add(gioca);
-
-        //Style hit button
-        hit.setBounds(50, 570, 230, 50);
-        hit.setBackground(new Color(217, 217, 217));
-        hit.setForeground(Color.black);
-        hit.setBorder(null);
-        hit.setFocusPainted(false);
-        hit.setFont(new Font("Arial", Font.PLAIN, 20));
-        add(hit);
-
-        //Style puntata text field
-        puntata.setBounds(290, 500, 230, 50);
-        puntata.setForeground(Color.black);
-        puntata.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
-        puntata.setFont(new Font("Arial", Font.PLAIN, 20));
-        add(puntata);
-
-        //Style stand button
-        stand.setBounds(290, 570, 230, 50);
-        stand.setBackground(new Color(217, 217, 217));
-        stand.setForeground(Color.black);
-        stand.setBorder(null);
-        stand.setFocusPainted(false);
-        stand.setFont(new Font("Arial", Font.PLAIN, 20));
-        add(stand);
-
-        //Style doppia button
-        doppia.setBounds(530, 500, 230, 50);
-        doppia.setBackground(new Color(217, 217, 217));
-        doppia.setForeground(Color.black);
-        doppia.setBorder(null);
-        doppia.setFocusPainted(false);
-        doppia.setFont(new Font("Arial", Font.PLAIN, 20));
-        add(doppia);
-
-        //Style split button
-        split.setBounds(530, 570, 230, 50);
-        split.setBackground(new Color(217, 217, 217));
-        split.setForeground(Color.black);
-        split.setBorder(null);
-        split.setFocusPainted(false);
-        split.setFont(new Font("Arial", Font.PLAIN, 20));
-        add(split);
-
-        //Style saldo label
-        saldo.setBounds(870, 640, 330, 20);
-        saldo.setForeground(Color.black);
-        saldo.setFont(new Font("Arial", Font.PLAIN, 15));
+        // Game area - Saldo
+        JLabel saldo = new JLabel("Saldo: 1000");
+        saldo.setBounds(20, 620, 200, 30);
+        saldo.setFont(new Font("Arial", Font.PLAIN, 20));
+        saldo.setForeground(Color.BLACK);
         add(saldo);
 
+        // Game area - Puntata
+        JComboBox<String> puntata = new JComboBox<String>();
+        puntata.setBounds(20, 660, 200, 30);
+        puntata.setFont(new Font("Arial", Font.PLAIN, 20));
+        puntata.setForeground(Color.BLACK);
+        puntata.addItem("10");
+        puntata.addItem("20");
+        puntata.addItem("50");
+        puntata.addItem("100");
+        puntata.addItem("200");
+        puntata.addItem("500");
+        puntata.addItem("1000");
+        puntata.addItem("2000");
+        add(puntata);
 
-        //Focus Listener
-        puntata.addFocusListener(new FocusListener() {
+        // Game area - Bottone
+        JButton bottone = new JButton("Gioca");
+        bottone.setBounds(320, 630, 200, 50);
+        bottone.setFont(new Font("Arial", Font.PLAIN, 20));
+        bottone.setForeground(Color.WHITE);
+        bottone.setBackground(new Color(21, 25, 28));
+        bottone.setFocusPainted(false);
+        bottone.setBorder(null);
+        add(bottone);
 
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (puntata.getText().equals("Inserisci la puntata")) {
-					puntata.setText("");
-				}
-			}
+        // Game area - Hit
+        JButton hit = new JButton("Hit");
+        hit.setBounds(540, 610, 200, 40);
+        hit.setFont(new Font("Arial", Font.PLAIN, 20));
+        hit.setForeground(Color.WHITE);
+        hit.setBackground(new Color(21, 25, 28));
+        hit.setFocusPainted(false);
+        hit.setBorder(null);
+        add(hit);
 
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (puntata.getText().equals("")) {
-					puntata.setText("Inserisci la puntata");
-				}
-			}
-		});
+        // Game area - Stand
+        JButton stand = new JButton("Stand");
+        stand.setBounds(540, 650, 200, 40);
+        stand.setFont(new Font("Arial", Font.PLAIN, 20));
+        stand.setForeground(Color.WHITE);
+        stand.setBackground(new Color(21, 25, 28));
+        stand.setFocusPainted(false);
+        stand.setBorder(null);
+        add(stand);
+
+        // Game area - Double
+        JButton doubleButton = new JButton("Double");
+        doubleButton.setBounds(740, 610, 200, 40);
+        doubleButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        doubleButton.setForeground(Color.WHITE);
+        doubleButton.setBackground(new Color(21, 25, 28));
+        doubleButton.setFocusPainted(false);
+        doubleButton.setBorder(null);
+        add(doubleButton);
+
+        // Game area - Split
+        JButton split = new JButton("Split");
+        split.setBounds(740, 650, 200, 40);
+        split.setFont(new Font("Arial", Font.PLAIN, 20));
+        split.setForeground(Color.WHITE);
+        split.setBackground(new Color(21, 25, 28));
+        split.setFocusPainted(false);
+        split.setBorder(null);
+        add(split);
     }
 }
