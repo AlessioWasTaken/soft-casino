@@ -6,7 +6,6 @@ import javax.swing.*;
 import auth.Access;
 import shopPage.Shop;
 import Menu.Menu;
-import homePage.Home;
 import slotMachine.SlotMachine;
 import corsaCavalli.CorsaCavalli;
 import blackJack.BlackJack;
@@ -15,7 +14,6 @@ public class VirtualCasino extends JFrame{
 	private Access access;
 	private Menu menu;	
 	private Shop shop = new Shop();
-	private Home home = new Home();
 	private SlotMachine slotMachine = new SlotMachine();
 	private CorsaCavalli corsaCavalli = new CorsaCavalli();
 	private BlackJack blackJack = new BlackJack();
@@ -42,10 +40,6 @@ public class VirtualCasino extends JFrame{
 		menu.setVisible(false);
 		this.getContentPane().add(menu);
 
-		// Aggiunta del pannello di home
-		
-		// Aggiunta dei pannelli
-		//this.getContentPane().add(home);
 
 		shop.setVisible(false);
 		this.getContentPane().add(shop);
@@ -63,11 +57,9 @@ public class VirtualCasino extends JFrame{
 	public void login(){
 		access.setVisible(false);
 		menu.setVisible(true);
-		home.setVisible(true);
 	}
 
 	public void setHome() {
-		home.setVisible(true);
 		menu.setVisible(true);
 		shop.setVisible(false);
 		slotMachine.setVisible(false);
@@ -76,7 +68,6 @@ public class VirtualCasino extends JFrame{
 	}
 
 	public void setShop() {
-		home.setVisible(false);
 		menu.setVisible(true);
 		shop.setVisible(true);
 		slotMachine.setVisible(false);
@@ -85,7 +76,6 @@ public class VirtualCasino extends JFrame{
 	}
 
 	public void setSlotMachine() {
-		home.setVisible(false);
 		menu.setVisible(true);
 		shop.setVisible(false);
 		slotMachine.setVisible(true);
@@ -94,7 +84,6 @@ public class VirtualCasino extends JFrame{
 	}
 
 	public void setCorsaCavalli() {
-		home.setVisible(false);
 		menu.setVisible(true);
 		shop.setVisible(false);
 		slotMachine.setVisible(false);
@@ -103,7 +92,6 @@ public class VirtualCasino extends JFrame{
 	}
 
 	public void setBlackJack() {
-		home.setVisible(false);
 		menu.setVisible(true);
 		shop.setVisible(false);
 		slotMachine.setVisible(false);
