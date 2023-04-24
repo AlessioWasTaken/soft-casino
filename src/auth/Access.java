@@ -3,6 +3,7 @@ package auth;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+// Local imports
 import Tester.VirtualCasino;
 
 import java.awt.*;
@@ -10,8 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-
-import standard.*;
 
 public class Access extends JPanel {
 	private VirtualCasino istanceOfApp;
@@ -37,9 +36,9 @@ public class Access extends JPanel {
 		add(Background);
 
 		// Data panel
-		RoundedPanel data = new RoundedPanel(new Color(34, 40, 44));
+		JPanel data = new JPanel();
 		data.setBounds(640, 30, 500, 650);
-		data.setBackground(Color.white);
+		data.setBackground(new Color(34, 40, 44));
 		data.setLayout(null);
 		add(data);
 
