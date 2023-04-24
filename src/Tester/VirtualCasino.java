@@ -17,6 +17,7 @@ public class VirtualCasino extends JFrame{
 	private SlotMachine slotMachine = new SlotMachine();
 	private CorsaCavalli corsaCavalli = new CorsaCavalli();
 	private BlackJack blackJack = new BlackJack();
+	private String isSelected = "";
 	
 	public VirtualCasino() {
 		super("Il Casino Virtuale");
@@ -59,16 +60,13 @@ public class VirtualCasino extends JFrame{
 		menu.setVisible(true);
 	}
 
-	public void setHome() {
-		menu.setVisible(true);
-		shop.setVisible(false);
-		slotMachine.setVisible(false);
-		corsaCavalli.setVisible(false);
-		blackJack.setVisible(false);
+	public void logout(){
+		access.setVisible(true);
+		menu.setVisible(false);
 	}
 
 	public void setShop() {
-		menu.setVisible(true);
+		isSelected = "shop";
 		shop.setVisible(true);
 		slotMachine.setVisible(false);
 		corsaCavalli.setVisible(false);
@@ -76,7 +74,7 @@ public class VirtualCasino extends JFrame{
 	}
 
 	public void setSlotMachine() {
-		menu.setVisible(true);
+		isSelected = "slotMachine";
 		shop.setVisible(false);
 		slotMachine.setVisible(true);
 		corsaCavalli.setVisible(false);
@@ -84,7 +82,7 @@ public class VirtualCasino extends JFrame{
 	}
 
 	public void setCorsaCavalli() {
-		menu.setVisible(true);
+		isSelected = "corsaCavalli";
 		shop.setVisible(false);
 		slotMachine.setVisible(false);
 		corsaCavalli.setVisible(true);
@@ -92,11 +90,15 @@ public class VirtualCasino extends JFrame{
 	}
 
 	public void setBlackJack() {
-		menu.setVisible(true);
+		isSelected = "blackJack";
 		shop.setVisible(false);
 		slotMachine.setVisible(false);
 		corsaCavalli.setVisible(false);
 		blackJack.setVisible(true);
+	}
+
+	public String getIsSelected() {
+		return isSelected;
 	}
 
 	public static void main(String[] args) {

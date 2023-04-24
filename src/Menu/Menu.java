@@ -55,9 +55,10 @@ public class Menu extends JPanel{
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        shop.setBounds(20, 260, 170, 50);
+        shop.setBounds(0, 260, 250, 50);
         shop.setForeground(Color.white);
         shop.setBorder(null);
+        shop.setBackground(new Color(21, 25, 28));
         shop.setContentAreaFilled(false);
         shop.setFocusPainted(false);
         shop.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -72,9 +73,10 @@ public class Menu extends JPanel{
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        slotMachine.setBounds(20, 320, 170, 50);
+        slotMachine.setBounds(0, 320, 250, 50);
         slotMachine.setForeground(Color.white);
         slotMachine.setBorder(null);
+        slotMachine.setBackground(new Color(21, 25, 28));
         slotMachine.setContentAreaFilled(false);
         slotMachine.setFocusPainted(false);
         slotMachine.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -89,9 +91,10 @@ public class Menu extends JPanel{
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        corsaCavalli.setBounds(20, 380, 170, 50);
+        corsaCavalli.setBounds(0, 380, 250, 50);
         corsaCavalli.setForeground(Color.white);
         corsaCavalli.setBorder(null);
+        corsaCavalli.setBackground(new Color(21, 25, 28));
         corsaCavalli.setContentAreaFilled(false);
         corsaCavalli.setFocusPainted(false);
         corsaCavalli.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -106,9 +109,10 @@ public class Menu extends JPanel{
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        blackJack.setBounds(20, 440, 170, 50);
+        blackJack.setBounds(0, 440, 250, 50);
         blackJack.setForeground(Color.white);
         blackJack.setBorder(null);
+        blackJack.setBackground(new Color(21, 25, 28));
         blackJack.setContentAreaFilled(false);
         blackJack.setFocusPainted(false);
         blackJack.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -123,7 +127,7 @@ public class Menu extends JPanel{
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        logout.setBounds(20, 500, 170, 50);
+        logout.setBounds(0, 500, 250, 50);
         logout.setForeground(Color.white);
         logout.setBorder(null);
         logout.setContentAreaFilled(false);
@@ -135,19 +139,47 @@ public class Menu extends JPanel{
         // Action listener
         shop.addActionListener(e -> {
             istanza.setShop();
+            if(istanza.getIsSelected() == "shop"){
+                shop.setContentAreaFilled(true);
+                slotMachine.setContentAreaFilled(false);
+                corsaCavalli.setContentAreaFilled(false);
+                blackJack.setContentAreaFilled(false);
+            }
         });
 
         slotMachine.addActionListener(e -> {
             istanza.setSlotMachine();
+            if(istanza.getIsSelected() == "slotMachine"){
+                shop.setContentAreaFilled(false);
+                slotMachine.setContentAreaFilled(true);
+                corsaCavalli.setContentAreaFilled(false);
+                blackJack.setContentAreaFilled(false);
+            }
         });
 
     
         corsaCavalli.addActionListener(e -> {
             istanza.setCorsaCavalli();
+            if(istanza.getIsSelected() == "corsaCavalli"){
+                shop.setContentAreaFilled(false);
+                slotMachine.setContentAreaFilled(false);
+                corsaCavalli.setContentAreaFilled(true);
+                blackJack.setContentAreaFilled(false);
+            }
         });
 
         blackJack.addActionListener(e -> {
             istanza.setBlackJack();
+            if(istanza.getIsSelected() == "blackJack"){
+                shop.setContentAreaFilled(false);
+                slotMachine.setContentAreaFilled(false);
+                corsaCavalli.setContentAreaFilled(false);
+                blackJack.setContentAreaFilled(true);
+            }
+        });
+
+        logout.addActionListener(e -> {
+            istanza.logout();
         });
     }
 }
