@@ -4,10 +4,12 @@ import javax.swing.*;
 
 public class RoundedPanel extends JPanel {
     private int radius;
+    private Color color;
 
-    public RoundedPanel() {
+    public RoundedPanel(Color color) {
         super();
         this.radius = 10;
+        this.color = color;
     }
 
     @Override
@@ -20,7 +22,7 @@ public class RoundedPanel extends JPanel {
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         //Draws the rounded panel with borders.
-        graphics.setColor(getBackground());
+        graphics.setColor(this.color);
         graphics.fillRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint background
         graphics.setColor(getForeground());
         graphics.drawRoundRect(0, 0, width-1, height-1, arcs.width, arcs.height); //paint border

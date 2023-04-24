@@ -1,7 +1,8 @@
 package Tester;
 
 import javax.swing.*;
-//import auth.Signin;
+import java.awt.*;
+import auth.Signin;
 import shopPage.Shop;
 import Menu.Menu;
 import homePage.Home;
@@ -10,7 +11,7 @@ import corsaCavalli.CorsaCavalli;
 import blackJack.BlackJack;
 
 public class VirtualCasino extends JFrame{
-	//private Signin login = new Signin();
+	private Signin login = new Signin();
 	private Menu menu = new Menu(this);	
 	private Shop shop = new Shop();
 	private Home home = new Home();
@@ -20,7 +21,7 @@ public class VirtualCasino extends JFrame{
 	
 	public VirtualCasino() {
 		super("Il Casino Virtuale");
-		this.setSize(1300, 700);
+		this.setSize(1300, 800);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -31,9 +32,9 @@ public class VirtualCasino extends JFrame{
 	
 	public void createWindow() {
 
-		//this.getContentPane().add(login);
-		this.getContentPane().add(menu);
-		this.getContentPane().add(home);
+		this.getContentPane().add(login);
+		//this.getContentPane().add(menu);
+		//this.getContentPane().add(home);
 
 		shop.setVisible(false);
 		this.getContentPane().add(shop);
