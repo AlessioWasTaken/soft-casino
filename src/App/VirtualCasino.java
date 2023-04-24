@@ -1,5 +1,4 @@
-package Tester;
-
+package App;
 import javax.swing.*;
 
 // Local imports

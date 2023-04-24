@@ -10,8 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-// Local imports
-import Tester.*;
+import App.VirtualCasino;
 
 public class Menu extends JPanel{
     private VirtualCasino istanza;

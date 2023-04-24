@@ -3,8 +3,7 @@ package auth;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-// Local imports
-import Tester.VirtualCasino;
+import App.VirtualCasino;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
