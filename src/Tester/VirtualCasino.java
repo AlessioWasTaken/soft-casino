@@ -110,4 +110,8 @@ public class VirtualCasino extends JFrame{
 		corsaCavalli.setVisible(false);
 		blackJack.setVisible(true);
 	}
+
+	public static void main(String[] args) {
+		new VirtualCasino();
+	}
 }

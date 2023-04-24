@@ -9,8 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+// Local imports
 import Tester.*;
-import standard.RoundedButton;
 
 public class Menu extends JPanel{
     private VirtualCasino istanza;
