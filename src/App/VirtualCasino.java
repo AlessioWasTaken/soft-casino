@@ -57,11 +57,20 @@ public class VirtualCasino extends JFrame{
 	public void login(){
 		access.setVisible(false);
 		menu.setVisible(true);
+		shop.setVisible(false);
+		slotMachine.setVisible(false);
+		corsaCavalli.setVisible(false);
+		blackJack.setVisible(false);
+		
 	}
 
 	public void logout(){
 		access.setVisible(true);
 		menu.setVisible(false);
+		shop.setVisible(false);
+		slotMachine.setVisible(false);
+		corsaCavalli.setVisible(false);
+		blackJack.setVisible(false);
 	}
 
 	public void setShop() {

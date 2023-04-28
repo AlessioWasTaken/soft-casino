@@ -5,7 +5,11 @@ import java.awt.Font;
 
 import javax.swing.*;
 
+import backend.blackjack.*;;
+
 public class BlackJack extends JPanel{
+    private String inputButton = "";
+    private Table table;
     
     public BlackJack() {
         setSize(1050, 800);
@@ -36,6 +40,7 @@ public class BlackJack extends JPanel{
         puntata.setBounds(20, 660, 200, 30);
         puntata.setFont(new Font("Arial", Font.PLAIN, 20));
         puntata.setForeground(Color.BLACK);
+        puntata.addItem("0");
         puntata.addItem("10");
         puntata.addItem("20");
         puntata.addItem("50");
@@ -54,6 +59,21 @@ public class BlackJack extends JPanel{
         bottone.setBackground(new Color(21, 25, 28));
         bottone.setFocusPainted(false);
         bottone.setBorder(null);
+        bottone.addActionListener(e ->{
+            if(puntata.getSelectedIndex() == 0){
+              System.out.println("Seleziona la puntata");
+            }else{
+                    System.out.print(puntata.getSelectedItem());
+
+                    table = new Table(Integer.parseInt(puntata.getSelectedItem().toString()));
+                    table.deal();
+                    while(table.getPlayerTurn()){
+                        System.out.println("Player: " + table.getPlayerValue());
+                        System.out.println("Dealer: " + table.getDealerValue());
+                        System.out.println("Hit or Stand or Double? (h/s/d)");
+                    }
+                }
+        });
         add(bottone);
 
         // Game area - Hit
@@ -64,6 +84,9 @@ public class BlackJack extends JPanel{
         hit.setBackground(new Color(21, 25, 28));
         hit.setFocusPainted(false);
         hit.setBorder(null);
+        hit.addActionListener(e ->{
+            table.hitPlayer();
+        });
         add(hit);
 
         // Game area - Stand
@@ -74,6 +97,9 @@ public class BlackJack extends JPanel{
         stand.setBackground(new Color(21, 25, 28));
         stand.setFocusPainted(false);
         stand.setBorder(null);
+        stand.addActionListener(e ->{
+            table.stand();
+        });
         add(stand);
 
         // Game area - Double
@@ -84,6 +110,9 @@ public class BlackJack extends JPanel{
         doubleButton.setBackground(new Color(21, 25, 28));
         doubleButton.setFocusPainted(false);
         doubleButton.setBorder(null);
+        doubleButton.addActionListener(e ->{
+            table.Double();
+        });
         add(doubleButton);
 
         // Game area - Split
