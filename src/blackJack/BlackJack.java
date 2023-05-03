@@ -2,6 +2,8 @@ package blackJack;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 
 import javax.swing.*;
 
@@ -10,6 +12,8 @@ import backend.blackjack.*;;
 public class BlackJack extends JPanel{
     private String inputButton = "";
     private Table table;
+    private JPanel player;
+    private JPanel dealer;
     
     public BlackJack() {
         setSize(1050, 800);
@@ -63,15 +67,16 @@ public class BlackJack extends JPanel{
             if(puntata.getSelectedIndex() == 0){
               System.out.println("Seleziona la puntata");
             }else{
-                    System.out.print(puntata.getSelectedItem());
-
                     table = new Table(Integer.parseInt(puntata.getSelectedItem().toString()));
                     table.deal();
-                    while(table.getPlayerTurn()){
-                        System.out.println("Player: " + table.getPlayerValue());
-                        System.out.println("Dealer: " + table.getDealerValue());
-                        System.out.println("Hit or Stand or Double? (h/s/d)");
+                    dealer = new JPanel();
+                    dealer.setBackground(Color.white);
+                    dealer.setBounds(0, 0, 400, 200);
+                    dealer.setLayout(new GridLayout(1,10));
+                    for(int i = 0; i<table.getDealerCard().size(); i++){
+                        dealer.add(table.getDealerCard().get(i));
                     }
+                    gameArea.add(dealer);
                 }
         });
         add(bottone);

@@ -9,11 +9,11 @@ public class Table {
     private boolean dealerTurn;
     private int bet;
 
-    public Table(int bet){
+    public Table(int puntata){
         player = new ArrayList<Card>();
         dealer = new ArrayList<Card>();
         logic = new Logic();
-        this.bet = bet;
+        this.bet = puntata;
         playerTurn = true;
         dealerTurn = false;
     }
@@ -162,5 +162,12 @@ public class Table {
 
     public boolean getDealerTurn(){
         return dealerTurn;
+    }
+
+    public ArrayList<Card> getDealerCard(){
+        return this.dealer;
+    }
+    public ArrayList<Card> getPlayerCard(){
+        return this.player;
     }
 }
