@@ -2,8 +2,9 @@ package blackJack;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -14,6 +15,8 @@ public class BlackJack extends JPanel{
     private Table table;
     private JPanel player;
     private JPanel dealer;
+    private int ContaPlayer, ContaDealer;
+    private JButton bottone, hit, stand, doubleButton;
     
     public BlackJack() {
         setSize(1050, 800);
@@ -56,7 +59,7 @@ public class BlackJack extends JPanel{
         add(puntata);
 
         // Game area - Bottone
-        JButton bottone = new JButton("Gioca");
+        bottone = new JButton("Gioca");
         bottone.setBounds(320, 630, 200, 50);
         bottone.setFont(new Font("Arial", Font.PLAIN, 20));
         bottone.setForeground(Color.WHITE);
@@ -67,22 +70,46 @@ public class BlackJack extends JPanel{
             if(puntata.getSelectedIndex() == 0){
               System.out.println("Seleziona la puntata");
             }else{
-                    table = new Table(Integer.parseInt(puntata.getSelectedItem().toString()));
-                    table.deal();
-                    dealer = new JPanel();
-                    dealer.setBackground(Color.white);
-                    dealer.setBounds(0, 0, 400, 200);
-                    dealer.setLayout(new GridLayout(1,10));
-                    for(int i = 0; i<table.getDealerCard().size(); i++){
-                        dealer.add(table.getDealerCard().get(i));
-                    }
-                    gameArea.add(dealer);
+                table = new Table(Integer.parseInt(puntata.getSelectedItem().toString()));
+                table.deal();
+
+                enable(true);
+                
+                // @audit-info : ContaPlayer e ContaDealer sono inutili perche non vengono mai usati
+                ContaDealer=2;
+                ContaPlayer=2;
+
+                dealer = new JPanel();
+                dealer.setBounds(96, 147, 828, 140);
+                dealer.setBackground(new Color(21, 25, 28));
+                gameArea.add(dealer);
+                dealer.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+                
+                player = new JPanel();
+                player.setBounds(96, 377, 828, 140);
+                player.setBackground(new Color(21, 25, 28));
+                gameArea.add(player);
+                player.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        
+                for(int i = 0; i<table.getDealerCard().size(); i++){
+                    dealer.add(table.getDealerCard().get(i));
                 }
+                for(int i = 0; i<table.getPlayerCard().size(); i++){
+                    player.add(table.getPlayerCard().get(i));
+                }
+
+                gameArea.revalidate();
+
+                if(table.getDealerValue()==21 || table.getPlayerValue()==21){
+                    table.win();
+                    enable(false);
+                }
+            }
         });
         add(bottone);
 
         // Game area - Hit
-        JButton hit = new JButton("Hit");
+        hit = new JButton("Hit");
         hit.setBounds(540, 610, 200, 40);
         hit.setFont(new Font("Arial", Font.PLAIN, 20));
         hit.setForeground(Color.WHITE);
@@ -90,12 +117,19 @@ public class BlackJack extends JPanel{
         hit.setFocusPainted(false);
         hit.setBorder(null);
         hit.addActionListener(e ->{
-            table.hitPlayer();
+            int win=table.hitPlayer();
+            player.add(table.getPlayerCard().get(ContaPlayer));
+            ContaPlayer++;
+            if(win!=69420){
+                //aggiungere metodo per modificare il saldo
+                enable(false);
+            }
+            gameArea.revalidate();
         });
         add(hit);
 
         // Game area - Stand
-        JButton stand = new JButton("Stand");
+        stand = new JButton("Stand");
         stand.setBounds(540, 650, 200, 40);
         stand.setFont(new Font("Arial", Font.PLAIN, 20));
         stand.setForeground(Color.WHITE);
@@ -104,11 +138,21 @@ public class BlackJack extends JPanel{
         stand.setBorder(null);
         stand.addActionListener(e ->{
             table.stand();
+            while(table.getDealerValue()<17){
+                int win=table.hitDealer();
+                dealer.add(table.getPlayerCard().get(ContaDealer));
+                ContaDealer++;
+                if(win!=69420){
+                    //aggiungere metodo per modificare il saldo
+                    enable(false);
+                }
+                gameArea.revalidate();
+            }
         });
         add(stand);
 
         // Game area - Double
-        JButton doubleButton = new JButton("Double");
+        doubleButton = new JButton("Double");
         doubleButton.setBounds(740, 610, 200, 40);
         doubleButton.setFont(new Font("Arial", Font.PLAIN, 20));
         doubleButton.setForeground(Color.WHITE);
@@ -129,5 +173,19 @@ public class BlackJack extends JPanel{
         split.setFocusPainted(false);
         split.setBorder(null);
         add(split);
+
+        enable(false);
+    }
+
+    public void enable(boolean A){
+        hit.setEnabled(A);
+        stand.setEnabled(A);
+        doubleButton.setEnabled(A);
+        if(A==false){
+            bottone.setEnabled(true);
+        }
+        else{
+            bottone.setEnabled(false);
+        }
     }
 }
