@@ -10,12 +10,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.IOException;
+
+import backend.Auth.*;
 
 public class Access extends JPanel {
 	private VirtualCasino istanceOfApp;
+	private Authentication Auth;
 
 	public Access(VirtualCasino istanceOfApp) {
 		this.istanceOfApp = istanceOfApp;
+		Auth=new Authentication();
 		setSize(new Dimension(1300, 800));
 		setBackground(Color.white);
 		setLayout(null);
@@ -228,6 +233,21 @@ public class Access extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if(access.getText().equals("Registrati")) {
 					// TODO Collegare il backend
+					try{
+						Auth.setPath(emailArea.getText());
+						if(Auth.Check()){	
+							System.out.println("Email gia registrata");	
+						}
+						else{
+							Auth.createPrinter();
+							Auth.Register(nomeArea.getText(), cognomeArea.getText(), emailArea.getText(), new String(passwordArea.getPassword()));
+						}
+						
+					}
+					catch(Exception EX){
+						System.out.println(EX);
+					}
+
 					textMode.setText("Metodo di pagamento");
 					nome.setText("Intestatario carta");
 					nomeArea.setText("Intestatario carta");
@@ -241,9 +261,32 @@ public class Access extends JPanel {
 					switchLogin.setVisible(false);
 				}else if(access.getText().equals("Aggiungi metodo")){
 					// TODO Collegare il backend
+					try{
+						Auth.AggiungiPagamento(nomeArea.getText(), cognomeArea.getText(), emailArea.getText(), new String(passwordArea.getPassword()));
+					}
+					catch(Exception EX){
+						System.out.println(EX);
+					}
 				}else{
 					// TODO Collegare il backend
-					istanceOfApp.login();
+					try{
+						Auth.setPath(emailArea.getText());
+						if(Auth.Check()){
+							if(Auth.Login(new String(passwordArea.getPassword()))){
+								istanceOfApp.login();
+							}
+							else{
+								System.out.println("PasswordErrata");
+							}
+						}
+						else{
+							System.out.println("Email non registrata");
+						}
+					}
+					catch(Exception EX){
+						System.out.println(EX);
+					}
+					
 				}
 			}
 		});
