@@ -16,6 +16,8 @@ public class Logic {
         }
     }
 
+    //ciao
+
     public Card getCard(){
         Card card = new Card();
         int suit = card.getSuit();

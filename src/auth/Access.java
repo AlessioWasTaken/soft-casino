@@ -249,7 +249,7 @@ public class Access extends JPanel {
 					cognomeVar = cognomeArea.getText();
 					emailVar = emailArea.getText();
 					passwordVar = String.valueOf(passwordArea.getPassword());
-					
+
 					textMode.setText("Metodo di pagamento");
 					nome.setText("Intestatario carta");
 					nomeArea.setText("Intestatario carta");
