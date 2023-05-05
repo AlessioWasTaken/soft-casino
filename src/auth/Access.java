@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import App.VirtualCasino;
+import backend.auth.Autenticazione;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ import java.awt.event.FocusListener;
 
 public class Access extends JPanel {
 	private VirtualCasino istanceOfApp;
+	private String nomeVar, cognomeVar, emailVar, passwordVar, CVVVar, scadenzaVar, numeroCartaVar, intestatarioCartaVar;
 
 	public Access(VirtualCasino istanceOfApp) {
 		this.istanceOfApp = istanceOfApp;
@@ -68,7 +70,7 @@ public class Access extends JPanel {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (nomeArea.getText().equals("Nome")) {
+				if (nomeArea.getText().equals("Nome") || nomeArea.getText().equals("Intestatario carta")) {
 					nomeArea.setText("");
 				}
 			}
@@ -76,7 +78,11 @@ public class Access extends JPanel {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (nomeArea.getText().equals("")) {
-					nomeArea.setText("Nome");
+					if(textMode.equals("Metodo di pagamento")){
+						nomeArea.setText("Intestatario carta");
+					}else{
+						nomeArea.setText("Nome");
+					}
 				}
 			}
 		});
@@ -101,7 +107,7 @@ public class Access extends JPanel {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (cognomeArea.getText().equals("Cognome")) {
+				if (cognomeArea.getText().equals("Cognome") || cognomeArea.getText().equals("Numero carta")) {
 					cognomeArea.setText("");
 				}
 			}
@@ -109,7 +115,11 @@ public class Access extends JPanel {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (cognomeArea.getText().equals("")) {
-					cognomeArea.setText("Cognome");
+					if(textMode.equals("Metodo di pagamento")){
+						cognomeArea.setText("Numero carta");
+					}else{
+						cognomeArea.setText("Cognome");
+					}
 				}
 			}
 		});
@@ -134,7 +144,7 @@ public class Access extends JPanel {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (emailArea.getText().equals("Email")) {
+				if (emailArea.getText().equals("Email") || emailArea.getText().equals("Data di scadenza")) {
 					emailArea.setText("");
 				}
 			}
@@ -142,7 +152,11 @@ public class Access extends JPanel {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (emailArea.getText().equals("")) {
-					emailArea.setText("Email");
+					if(textMode.equals("Metodo di pagamento")){
+						emailArea.setText("Data di scadenza");
+					}else{
+						emailArea.setText("Email");
+					}
 				}
 			}
 		});
@@ -167,7 +181,7 @@ public class Access extends JPanel {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (String.valueOf(passwordArea.getPassword()).equals("Password")) {
+				if (String.valueOf(passwordArea.getPassword()).equals("Password") || String.valueOf(passwordArea.getPassword()).equals("CVV")) {
 					passwordArea.setText("");
 					passwordArea.setEchoChar('*');
 				}
@@ -176,8 +190,12 @@ public class Access extends JPanel {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (String.valueOf(passwordArea.getPassword()).equals("")) {
-					passwordArea.setText("Password");
-					passwordArea.setEchoChar((char)0);
+					if(textMode.equals("Metodo di pagamento")){
+						passwordArea.setText("CVV");
+					}else{	
+						passwordArea.setText("Password");
+						passwordArea.setEchoChar((char)0);
+					}
 				}
 			}
 		});
@@ -227,7 +245,11 @@ public class Access extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(access.getText().equals("Registrati")) {
-					// TODO Collegare il backend
+					nomeVar = nomeArea.getText();
+					cognomeVar = cognomeArea.getText();
+					emailVar = emailArea.getText();
+					passwordVar = String.valueOf(passwordArea.getPassword());
+					
 					textMode.setText("Metodo di pagamento");
 					nome.setText("Intestatario carta");
 					nomeArea.setText("Intestatario carta");
@@ -240,10 +262,21 @@ public class Access extends JPanel {
 					access.setText("Aggiungi metodo");
 					switchLogin.setVisible(false);
 				}else if(access.getText().equals("Aggiungi metodo")){
-					// TODO Collegare il backend
+					intestatarioCartaVar = nomeArea.getText();
+					numeroCartaVar = cognomeArea.getText();
+					scadenzaVar = emailArea.getText();
+					CVVVar = String.valueOf(passwordArea.getPassword());
+					if(Autenticazione.register(nomeVar, cognomeVar, emailVar, passwordVar, intestatarioCartaVar, CVVVar, scadenzaVar, numeroCartaVar, 0) == true){
+						istanceOfApp.login();
+					}else{
+						JOptionPane.showMessageDialog(null, "Errore durante la registrazione", "Errore", JOptionPane.ERROR_MESSAGE);
+					}
 				}else{
-					// TODO Collegare il backend
-					istanceOfApp.login();
+					if(Autenticazione.login(emailArea.getText(), String.valueOf(passwordArea.getPassword())) == true){
+						istanceOfApp.login();
+					}else{
+						JOptionPane.showMessageDialog(null, "Email o password errati", "Errore", JOptionPane.ERROR_MESSAGE);
+					}
 				}
 			}
 		});

@@ -75,7 +75,6 @@ public class BlackJack extends JPanel{
 
                 enable(true);
                 
-                // @audit-info : ContaPlayer e ContaDealer sono inutili perche non vengono mai usati
                 ContaDealer=2;
                 ContaPlayer=2;
 
