@@ -3,6 +3,7 @@ import javax.swing.*;
 
 // Local imports
 import auth.Access;
+import backend.json.JsonEdit;
 import shopPage.Shop;
 import Menu.Menu;
 import slotMachine.SlotMachine;
@@ -10,13 +11,14 @@ import corsaCavalli.CorsaCavalli;
 import blackJack.BlackJack;
 
 public class VirtualCasino extends JFrame{
-	private Access access;
-	private Menu menu;	
+	private Access access = new Access(this);
+	private Menu menu = new Menu(this, access);	
 	private Shop shop = new Shop();
 	private SlotMachine slotMachine = new SlotMachine();
 	private CorsaCavalli corsaCavalli = new CorsaCavalli();
 	private BlackJack blackJack = new BlackJack();
 	private String isSelected = "";
+	private String email = "";
 	
 	public VirtualCasino() {
 		super("Il Casino Virtuale");
@@ -32,11 +34,10 @@ public class VirtualCasino extends JFrame{
 	
 	public void init() {
 		// Aggiunta del pannello di login
-		access = new Access(this);
 		this.getContentPane().add(access);
 
 		// Aggiunta del pannello di menu
-		menu = new Menu(this);
+		menu = new Menu(this, access);
 		menu.setVisible(false);
 		this.getContentPane().add(menu);
 
@@ -108,8 +109,13 @@ public class VirtualCasino extends JFrame{
 	public String getIsSelected() {
 		return isSelected;
 	}
-
+	
+	public void setEmail(String email) {
+		email = email;
+		menu.user.setText(JsonEdit.getUser(email));
+	}
 	public static void main(String[] args) {
 		new VirtualCasino();
 	}
+
 }

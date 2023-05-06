@@ -9,13 +9,15 @@
     "password": "1",
     "cognome": "Sarica",
     "nome": "Alessio",
-    "email": "a.sarica@admin.it"
+    "email": "a.sarica@admin.it",
+    "saldo": 10000
   },
   {
     "nome": "Mario",
     "cognome": "Rossi",
     "email": "mario.rossi@gmail.com",
     "password": "1",
+    "saldo": 0,
     "carta": {
       "CVV": "111",
       "scadenza": "12/26",

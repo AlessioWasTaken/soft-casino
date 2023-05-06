@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import App.VirtualCasino;
 import backend.auth.Autenticazione;
+import Menu.Menu;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -267,12 +268,14 @@ public class Access extends JPanel {
 					scadenzaVar = emailArea.getText();
 					CVVVar = String.valueOf(passwordArea.getPassword());
 					if(Autenticazione.register(nomeVar, cognomeVar, emailVar, passwordVar, intestatarioCartaVar, CVVVar, scadenzaVar, numeroCartaVar, 0) == true){
+						istanceOfApp.setEmail(emailVar);
 						istanceOfApp.login();
 					}else{
-						JOptionPane.showMessageDialog(null, "Errore durante la registrazione", "Errore", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Errore durante la registrazione o utente gia registrato", "Errore", JOptionPane.ERROR_MESSAGE);
 					}
 				}else{
 					if(Autenticazione.login(emailArea.getText(), String.valueOf(passwordArea.getPassword())) == true){
+						istanceOfApp.setEmail(emailArea.getText());
 						istanceOfApp.login();
 					}else{
 						JOptionPane.showMessageDialog(null, "Email o password errati", "Errore", JOptionPane.ERROR_MESSAGE);

@@ -11,14 +11,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import App.VirtualCasino;
+import auth.Access;
+import backend.json.JsonEdit;
 
 public class Menu extends JPanel{
     private VirtualCasino istanza;
+    private Access isAccess;
     private JButton blackJack;
     private JButton logout;
+    public JLabel user = new JLabel("");
 
-    public Menu(VirtualCasino istanza) {
+    public Menu(VirtualCasino istanza, Access isAccess) {
         this.istanza = istanza;
+        this.isAccess = isAccess;
         setSize(250, 900);
         setLayout(null);
         setBackground(new Color(34, 40 , 44));
@@ -39,7 +44,6 @@ public class Menu extends JPanel{
         add(logo);
 
         // User
-        JLabel user = new JLabel("Alessio Sarica");
         user.setBounds(20, 200, 200, 50);
         user.setForeground(Color.white);
         user.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -181,4 +185,6 @@ public class Menu extends JPanel{
             istanza.logout();
         });
     }
+
+
 }
