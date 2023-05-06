@@ -32,6 +32,19 @@ public class JsonEdit {
         return writer(json);
     }
 
+    // Metodo statico dove viene letto il saldo dell utente passandoli come parametro il nome e cognome
+    public static double readSaldo(String nome, String cognome) {
+        JSONArray json = reader();
+        for (Object o : json) {
+            JSONObject obj = (JSONObject) o;
+            if (obj.get("nome").equals(nome) && obj.get("cognome").equals(cognome)) {
+                return (double) obj.get("saldo");
+            }
+        }
+        return 0;
+    }
+    
+
     private static JSONArray reader() {
         try {
             Object obj = new JSONParser().parse(new FileReader("src\\backend\\auth\\Database.json"));
