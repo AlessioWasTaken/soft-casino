@@ -14,11 +14,10 @@ public class VirtualCasino extends JFrame{
 	private Access access = new Access(this);
 	private Menu menu = new Menu(this, access);	
 	private Shop shop = new Shop();
-	private SlotMachine slotMachine = new SlotMachine();
+	private SlotMachine slotMachine = new SlotMachine(menu);
 	private CorsaCavalli corsaCavalli = new CorsaCavalli();
 	private BlackJack blackJack = new BlackJack();
 	private String isSelected = "";
-	private String email = "";
 	
 	public VirtualCasino() {
 		super("Il Casino Virtuale");
@@ -111,8 +110,10 @@ public class VirtualCasino extends JFrame{
 	}
 	
 	public void setEmail(String email) {
-		email = email;
 		menu.user.setText(JsonEdit.getUser(email));
+		String[] userData = menu.user.getText().split(" ");
+		slotMachine.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
+		slotMachine.userData = userData;
 	}
 	public static void main(String[] args) {
 		new VirtualCasino();

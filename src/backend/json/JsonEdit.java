@@ -23,11 +23,13 @@ public class JsonEdit {
         return user;
     }
 
-    public static boolean writeSaldo(double saldo) {
+    public static boolean writeSaldo(String nome, String cognome, double saldo) {
         JSONArray json = reader();
         for (Object o : json) {
             JSONObject obj = (JSONObject) o;
-            obj.put("saldo", saldo);
+            if (obj.get("nome").equals(nome) && obj.get("cognome").equals(cognome)) {
+                obj.put("saldo", saldo);
+            }
         }
         return writer(json);
     }
@@ -38,7 +40,7 @@ public class JsonEdit {
         for (Object o : json) {
             JSONObject obj = (JSONObject) o;
             if (obj.get("nome").equals(nome) && obj.get("cognome").equals(cognome)) {
-                return (double) obj.get("saldo");
+                return Double.parseDouble(obj.get("saldo").toString());
             }
         }
         return 0;
