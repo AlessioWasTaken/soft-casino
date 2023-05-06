@@ -123,7 +123,7 @@ public class SlotMachine extends JPanel{
             //aggiunge i componenti all'interno dei pannelli mobili
             Aggiunta();
 
-        	timer = new Timer(20, new ActionListener() {
+        	timer = new Timer(1, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     //aggiorna la posizione dello slider 1
