@@ -13,6 +13,7 @@ public class Card extends JLabel{
     private int suit;
 
     public Card(){
+        super();
         number = (int) ((Math.random() * 13)+1);
         suit = (int) ((Math.random() * 4)+1);
 
