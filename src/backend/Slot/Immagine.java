@@ -17,13 +17,13 @@ public class Immagine extends JLabel{
 		if(chance== 1) {
 			Num=69420;
 		}
-		this.setSize(100, 120);
+		this.setSize(173, 180);
         this.setPreferredSize(new Dimension(120, 120));
         this.setBackground(Color.red);
         
         ImageIcon img = new ImageIcon("src/assets/Immagini/"+Num+".jpg");
         Image image = img.getImage();
-        Image imgScaled = image.getScaledInstance(100, 120, Image.SCALE_SMOOTH);
+        Image imgScaled = image.getScaledInstance(173, 180, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imgScaled);
         this.setIcon(scaledIcon);
 	}
