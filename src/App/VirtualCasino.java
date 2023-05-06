@@ -114,6 +114,8 @@ public class VirtualCasino extends JFrame{
 		String[] userData = menu.user.getText().split(" ");
 		slotMachine.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
 		slotMachine.userData = userData;
+		shop.userData = userData;
+		shop.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
 	}
 	public static void main(String[] args) {
 		new VirtualCasino();

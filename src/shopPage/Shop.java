@@ -14,8 +14,13 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import backend.json.JsonEdit;
+
 public class Shop extends JPanel{
     private int isSelected = 0;
+    public String[] userData;
+    public JLabel saldo;
+    JPanel pacchetto1, pacchetto2, pacchetto3;
 
 
     public Shop() {
@@ -36,8 +41,15 @@ public class Shop extends JPanel{
         titolo.setVerticalAlignment(JLabel.TOP);
         add(titolo);
 
+        saldo = new JLabel("Saldo: ");
+        saldo.setBounds(10, 700, 290, 50);
+        saldo.setFont(new Font("Arial", Font.PLAIN, 20));
+        saldo.setHorizontalAlignment(JLabel.LEFT);
+        saldo.setForeground(Color.black);
+        add(saldo);
+
         // Pacchetto 1
-        JPanel pacchetto1 = new JPanel();
+        pacchetto1 = new JPanel();
         pacchetto1.setBounds(20, 100, 290, 400);
         pacchetto1.setLayout(null);
         pacchetto1.setBackground(new Color(21, 25, 28));
@@ -49,16 +61,19 @@ public class Shop extends JPanel{
             @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
                 isSelected = 1;
+                pacchetto1.setBackground(Color.gray);
+                pacchetto2.setBackground(new Color(21, 25, 28));
+                pacchetto3.setBackground(new Color(21, 25, 28));
             }
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent e) {
-                pacchetto1.setBackground(new Color(21, 25, 28));
+                
             }
 
             @Override
             public void mouseEntered(java.awt.event.MouseEvent e) {
-                pacchetto1.setBackground(new Color(34, 40, 44));
+                
             }
 
             @Override
@@ -105,7 +120,7 @@ public class Shop extends JPanel{
         add(pacchetto1);
 
         // Pacchetto 2
-        JPanel pacchetto2 = new JPanel();
+        pacchetto2 = new JPanel();
         pacchetto2.setBounds(350, 100, 290, 400);
         pacchetto2.setLayout(null);
         pacchetto2.setBackground(new Color(21, 25, 28));
@@ -117,16 +132,19 @@ public class Shop extends JPanel{
             @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
                 isSelected = 2;
+                pacchetto1.setBackground(new Color(21, 25, 28));
+                pacchetto2.setBackground(Color.gray);
+                pacchetto3.setBackground(new Color(21, 25, 28));
             }
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent e) {
-                pacchetto2.setBackground(new Color(21, 25, 28));
+                
             }
 
             @Override
             public void mouseEntered(java.awt.event.MouseEvent e) {
-                pacchetto2.setBackground(new Color(34, 40, 44));
+                
             }
 
             @Override
@@ -173,7 +191,7 @@ public class Shop extends JPanel{
         add(pacchetto2);
 
         // Pacchetto 3
-        JPanel pacchetto3 = new JPanel();
+        pacchetto3 = new JPanel();
         pacchetto3.setBounds(670, 100, 290, 400);
         pacchetto3.setLayout(null);
         pacchetto3.setBackground(new Color(21, 25, 28));
@@ -185,16 +203,18 @@ public class Shop extends JPanel{
             @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
                 isSelected = 3;
+                pacchetto1.setBackground(new Color(21, 25, 28));
+                pacchetto2.setBackground(new Color(21, 25, 28));
+                pacchetto3.setBackground(Color.gray);
             }
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent e) {
-                pacchetto3.setBackground(new Color(21, 25, 28));
             }
 
             @Override
             public void mouseEntered(java.awt.event.MouseEvent e) {
-                pacchetto3.setBackground(new Color(34, 40, 44));
+
             }
 
             @Override
@@ -250,15 +270,22 @@ public class Shop extends JPanel{
         acquista.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (isSelected == 1) {
-                    System.out.println("Acquistato pacchetto 1");
-                    // TODO: Implementare backend
-                } else if (isSelected == 2) {
-                    System.out.println("Acquistato pacchetto 2");
-                    // TODO: Implementare backend
-                } else if (isSelected == 3) {
-                    System.out.println("Acquistato pacchetto 3");
-                    // TODO: Implementare backend
+                Double saldoAttuale = JsonEdit.readSaldo(userData[0], userData[1]);
+                switch(isSelected){
+                    case 1:
+                        JsonEdit.writeSaldo(userData[0], userData[1], saldoAttuale + Double.parseDouble(quantita.getText().split(" ")[0]));
+                        saldo.setText("Saldo: "+JsonEdit.readSaldo(userData[0], userData[1]) + " Fish");
+                    break;
+
+                    case 2:
+                        JsonEdit.writeSaldo(userData[0], userData[1], saldoAttuale + Double.parseDouble(quantita2.getText().split(" ")[0]));
+                        saldo.setText("Saldo: "+JsonEdit.readSaldo(userData[0], userData[1]) + " Fish");
+                    break;
+
+                    case 3:
+                        JsonEdit.writeSaldo(userData[0], userData[1], saldoAttuale + Double.parseDouble(quantita3.getText().split(" ")[0]));
+                        saldo.setText("Saldo: "+JsonEdit.readSaldo(userData[0], userData[1]) + " Fish");
+                    break;
                 }
             }
         });

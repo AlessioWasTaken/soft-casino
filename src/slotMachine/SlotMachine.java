@@ -150,107 +150,113 @@ public class SlotMachine extends JPanel {
                     JOptionPane.showMessageDialog(Slot, "Non hai abbastanza soldi", "Warning",
                             JOptionPane.WARNING_MESSAGE);
                 } else {
-                    // quando inizia la partità disabilita il pulsante
-                    enable();
-
-                    // Imposta la posizione
-                    SlidingImage.setLocation(SlidingImage.getX(), -564);
-                    SlidingImage2.setLocation(SlidingImage2.getX(), -564);
-                    SlidingImage3.setLocation(SlidingImage3.getX(), -564);
-
-                    // Se non è la prima partita rimuove le JLabel vecchie
-                    if (firstGame != true) {
-                        // rimuove le JLabel vecchie, se funziona.
-                        remove();
+                    if (JsonEdit.readSaldo(userData[0], userData[1]) < Double
+                            .parseDouble(puntata.getSelectedItem().toString())) {
+                        JOptionPane.showMessageDialog(Slot, "Non hai abbastanza soldi", "Warning",
+                                JOptionPane.WARNING_MESSAGE);
                     } else {
-                        firstGame = false;
+                        // quando inizia la partità disabilita il pulsante
+                        enable();
+
+                        // Imposta la posizione
+                        SlidingImage.setLocation(SlidingImage.getX(), -564);
+                        SlidingImage2.setLocation(SlidingImage2.getX(), -564);
+                        SlidingImage3.setLocation(SlidingImage3.getX(), -564);
+
+                        // Se non è la prima partita rimuove le JLabel vecchie
+                        if (firstGame != true) {
+                            // rimuove le JLabel vecchie, se funziona.
+                            remove();
+                        } else {
+                            firstGame = false;
+                        }
+
+                        // genera i numeri
+                        logica.Genera();
+
+                        // imposta la scommessa
+
+                        logica.setScommessa((int) Integer.parseInt(puntata.getSelectedItem().toString()));
+
+                        // Impota le immagini
+                        img = logica.getNumeri();
+
+                        // aggiunge i componenti all'interno dei pannelli mobili
+                        Aggiunta();
+
+                        // avvia il timer
+                        timer = new Timer(1, new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                // aggiorna la posizione dello slider 1
+                                if (SlidingImage.getY() >= 11) {
+                                    SlidingImage.setLocation(SlidingImage.getX(), 11);
+                                } else {
+                                    SlidingImage.setLocation(SlidingImage.getX(), SlidingImage.getY() + 10);
+                                }
+
+                                // Ricarica le immagini
+                                SlidingImage.repaint();
+                                SlidingImage.revalidate();
+
+                                // aggiorna la posizione dello slider 2
+                                if (SlidingImage2.getY() >= 11) {
+                                    SlidingImage2.setLocation(SlidingImage2.getX(), 11);
+                                } else {
+                                    SlidingImage2.setLocation(SlidingImage2.getX(), SlidingImage2.getY() + 9);
+                                }
+
+                                // Ricarica le immagini
+                                SlidingImage2.repaint();
+                                SlidingImage2.revalidate();
+
+                                // aggiorna la posizione dello slider 3
+                                if (SlidingImage3.getY() >= 11) {
+                                    SlidingImage3.setLocation(SlidingImage3.getX(), 11);
+                                    timer.stop();
+                                } else {
+                                    SlidingImage3.setLocation(SlidingImage3.getX(), SlidingImage3.getY() + 8);
+                                }
+
+                                // Ricarica le immagini
+                                SlidingImage3.repaint();
+                                SlidingImage3.revalidate();
+                            }
+                        });
+                        timer.start();
+
+                        // Controlla se hai vinto
+                        int win = logica.Win();
+
+                        // Timer per il risultato che parte dopo che lo slider si è fermato
+                        timerVincita = new Timer(2000, new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                if (win > 0) {
+                                    JOptionPane.showMessageDialog(null, "Hai vinto " + win + " Monete", "Result",
+                                            JOptionPane.INFORMATION_MESSAGE);
+                                    Double saldoReaded = JsonEdit.readSaldo(userData[0], userData[1]);
+                                    saldoReaded += Double.parseDouble(puntata.getSelectedItem().toString());
+                                    JsonEdit.writeSaldo(userData[0], userData[1], saldoReaded);
+                                    saldo.setText("Saldo: " + saldoReaded);
+                                    timerVincita.stop();
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Hai perso " + win + " Monete", "Result",
+                                            JOptionPane.INFORMATION_MESSAGE);
+                                    Double saldoReaded = JsonEdit.readSaldo(userData[0], userData[1]);
+                                    saldoReaded -= Double.parseDouble(puntata.getSelectedItem().toString());
+                                    JsonEdit.writeSaldo(userData[0], userData[1], saldoReaded);
+                                    saldo.setText("Saldo: " + saldoReaded);
+                                    timerVincita.stop();
+                                }
+                            }
+                        });
+
+                        timerVincita.start();
+
+                        // Abilita il pulsante
+                        enable();
                     }
-
-                    // genera i numeri
-                    logica.Genera();
-
-                    // imposta la scommessa
-
-                    logica.setScommessa((int) Integer.parseInt(puntata.getSelectedItem().toString()));
-
-                    // Impota le immagini
-                    img = logica.getNumeri();
-
-                    // aggiunge i componenti all'interno dei pannelli mobili
-                    Aggiunta();
-
-                    // avvia il timer
-                    timer = new Timer(1, new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            // aggiorna la posizione dello slider 1
-                            if (SlidingImage.getY() >= 11) {
-                                SlidingImage.setLocation(SlidingImage.getX(), 11);
-                            } else {
-                                SlidingImage.setLocation(SlidingImage.getX(), SlidingImage.getY() + 10);
-                            }
-
-                            // Ricarica le immagini
-                            SlidingImage.repaint();
-                            SlidingImage.revalidate();
-
-                            // aggiorna la posizione dello slider 2
-                            if (SlidingImage2.getY() >= 11) {
-                                SlidingImage2.setLocation(SlidingImage2.getX(), 11);
-                            } else {
-                                SlidingImage2.setLocation(SlidingImage2.getX(), SlidingImage2.getY() + 9);
-                            }
-
-                            // Ricarica le immagini
-                            SlidingImage2.repaint();
-                            SlidingImage2.revalidate();
-
-                            // aggiorna la posizione dello slider 3
-                            if (SlidingImage3.getY() >= 11) {
-                                SlidingImage3.setLocation(SlidingImage3.getX(), 11);
-                                timer.stop();
-                            } else {
-                                SlidingImage3.setLocation(SlidingImage3.getX(), SlidingImage3.getY() + 8);
-                            }
-
-                            // Ricarica le immagini
-                            SlidingImage3.repaint();
-                            SlidingImage3.revalidate();
-                        }
-                    });
-                    timer.start();
-
-                    // Controlla se hai vinto
-                    int win = logica.Win();
-
-                    // Timer per il risultato che parte dopo che lo slider si è fermato
-                    timerVincita = new Timer(2000, new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (win > 0) {
-                                JOptionPane.showMessageDialog(null, "Hai vinto " + win + " Monete", "Result",
-                                        JOptionPane.INFORMATION_MESSAGE);
-                                Double saldoReaded = JsonEdit.readSaldo(userData[0], userData[1]);
-                                saldoReaded += Double.parseDouble(puntata.getSelectedItem().toString());
-                                JsonEdit.writeSaldo(userData[0], userData[1], saldoReaded);
-                                saldo.setText("Saldo: " + saldoReaded);
-                                timerVincita.stop();
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Hai perso " + win + " Monete", "Result",
-                                        JOptionPane.INFORMATION_MESSAGE);
-                                Double saldoReaded = JsonEdit.readSaldo(userData[0], userData[1]);
-                                saldoReaded -= Double.parseDouble(puntata.getSelectedItem().toString());
-                                JsonEdit.writeSaldo(userData[0], userData[1], saldoReaded);
-                                saldo.setText("Saldo: " + saldoReaded);
-                                timerVincita.stop();
-                            }
-                        }
-                    });
-
-                    timerVincita.start();
-
-                    // Abilita il pulsante
-                    enable();
                 }
             }
         });
