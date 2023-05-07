@@ -12,7 +12,7 @@ import blackJack.BlackJack;
 
 public class VirtualCasino extends JFrame{
 	private Access access = new Access(this);
-	private Menu menu = new Menu(this, access);	
+	private Menu menu = new Menu(this);	
 	private Shop shop = new Shop();
 	private SlotMachine slotMachine = new SlotMachine(menu);
 	private CorsaCavalli corsaCavalli = new CorsaCavalli();
@@ -37,7 +37,7 @@ public class VirtualCasino extends JFrame{
 		this.getContentPane().add(access);
 
 		// Aggiunta del pannello di menu
-		menu = new Menu(this, access);
+		menu = new Menu(this);
 		menu.setVisible(false);
 		this.getContentPane().add(menu);
 

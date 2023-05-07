@@ -21,7 +21,6 @@ import backend.Slot.Logica;
 import backend.json.JsonEdit;
 
 public class SlotMachine extends JPanel {
-    private Menu istanzaMenu;
     // Deve essere pubblico per poter essere utilizzato da altre classi dopo
     // l'istanziazione
     public JLabel saldo;

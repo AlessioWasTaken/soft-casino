@@ -11,19 +11,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import App.VirtualCasino;
-import auth.Access;
-import backend.json.JsonEdit;
 
 public class Menu extends JPanel{
     private VirtualCasino istanza;
-    private Access isAccess;
     private JButton blackJack;
     private JButton logout;
     public JLabel user = new JLabel("");
 
-    public Menu(VirtualCasino istanza, Access isAccess) {
+    public Menu(VirtualCasino istanza) {
         this.istanza = istanza;
-        this.isAccess = isAccess;
         setSize(250, 900);
         setLayout(null);
         setBackground(new Color(34, 40 , 44));

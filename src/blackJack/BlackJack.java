@@ -4,16 +4,12 @@ import java.awt.Component;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
 import backend.blackjack.*;
 import backend.json.JsonEdit;
 
 public class BlackJack extends JPanel{
-    private String inputButton = "";
     private Table table;
     private JPanel player;
     private JPanel dealer;
