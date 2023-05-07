@@ -244,7 +244,7 @@ public class SlotMachine extends JPanel {
                                 Double saldoReaded = JsonEdit.readSaldo(userData[0], userData[1]);
                                 saldoReaded += win;
                                 JsonEdit.writeSaldo(userData[0], userData[1], saldoReaded);
-                                saldo.setText("Saldo: " + saldoReaded);
+                                saldo.setText("Saldo: " + saldoReaded + " FishCoin");
                                 enable();
                                 timerVincita.stop();
                             }

@@ -80,7 +80,7 @@ public class VirtualCasino extends JFrame{
 		slotMachine.setVisible(false);
 		corsaCavalli.setVisible(false);
 		blackJack.setVisible(false);
-		shop.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
+		shop.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
 	}
 
 	public void setSlotMachine() {
@@ -89,7 +89,7 @@ public class VirtualCasino extends JFrame{
 		slotMachine.setVisible(true);
 		corsaCavalli.setVisible(false);
 		blackJack.setVisible(false);
-		slotMachine.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
+		slotMachine.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
 	}
 
 	public void setCorsaCavalli() {
@@ -98,7 +98,7 @@ public class VirtualCasino extends JFrame{
 		slotMachine.setVisible(false);
 		corsaCavalli.setVisible(true);
 		blackJack.setVisible(false);
-		corsaCavalli.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
+		corsaCavalli.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
 	}
 
 	public void setBlackJack() {
@@ -107,7 +107,7 @@ public class VirtualCasino extends JFrame{
 		slotMachine.setVisible(false);
 		corsaCavalli.setVisible(false);
 		blackJack.setVisible(true);
-		blackJack.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
+		blackJack.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
 	}
 
 	public String getIsSelected() {
@@ -117,14 +117,14 @@ public class VirtualCasino extends JFrame{
 	public void setEmail(String email) {
 		menu.user.setText(JsonEdit.getUser(email));
 		userData = menu.user.getText().split(" ");
-		slotMachine.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
+		slotMachine.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
 		slotMachine.userData = userData;
-		blackJack.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
+		blackJack.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FiashCoin");
 		blackJack.userData = userData;
-		corsaCavalli.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
+		corsaCavalli.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
 		corsaCavalli.userData = userData;
 		shop.userData = userData;
-		shop.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
+		shop.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
 	}
 	public static void main(String[] args) {
 		new VirtualCasino();
