@@ -19,7 +19,7 @@ public class BlackJack extends JPanel{
     private JPanel dealer;
     JComboBox<String> puntata;
     private int ContaPlayer, ContaDealer;
-    private JButton bottone, hit, stand, doubleButton;
+    private JButton bottone, hit, stand, doubleButton, forfeit;
 
     private boolean firstGame=true;
 
@@ -223,14 +223,24 @@ public class BlackJack extends JPanel{
         add(doubleButton);
 
         // Game area - Split
-        JButton split = new JButton("Split");
-        split.setBounds(740, 650, 200, 40);
-        split.setFont(new Font("Arial", Font.PLAIN, 20));
-        split.setForeground(Color.WHITE);
-        split.setBackground(new Color(21, 25, 28));
-        split.setFocusPainted(false);
-        split.setBorder(null);
-        add(split);
+        forfeit = new JButton("Forfeit");
+        forfeit.setBounds(740, 650, 200, 40);
+        forfeit.setFont(new Font("Arial", Font.PLAIN, 20));
+        forfeit.setForeground(Color.WHITE);
+        forfeit.setBackground(new Color(21, 25, 28));
+        forfeit.setFocusPainted(false);
+        forfeit.setBorder(null);
+        add(forfeit);
+        forfeit.addActionListener(e ->{
+            int win=table.forfeit();
+
+            JOptionPane.showMessageDialog(null, "Hai concesso la partita, " + win + " Monete", "Result", JOptionPane.INFORMATION_MESSAGE);
+            Double saldoReaded = JsonEdit.readSaldo(userData[0], userData[1]);
+            saldoReaded += win;
+            JsonEdit.writeSaldo(userData[0], userData[1], saldoReaded);
+            saldo.setText("Saldo: " + saldoReaded);
+            enable(false);
+        });
 
         enable(false);
     }
@@ -239,6 +249,7 @@ public class BlackJack extends JPanel{
         hit.setEnabled(A);
         stand.setEnabled(A);
         doubleButton.setEnabled(A);
+        forfeit.setEnabled(A);
         if(A==false){
             bottone.setEnabled(true);
         }

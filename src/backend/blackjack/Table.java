@@ -184,8 +184,9 @@ public class Table {
         return this.player;
     }
 
-    public void forfeit(){
+    public int forfeit(){
         playerTurn=false;
         dealerTurn=false;
+        return bet/-2;
     }
 }
