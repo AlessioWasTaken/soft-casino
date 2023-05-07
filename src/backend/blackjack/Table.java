@@ -18,6 +18,10 @@ public class Table {
         dealerTurn = false;
     }
 
+    public int getbet(){
+        return bet;
+    }
+
     public void reset(){
         player.clear();
         dealer.clear();
@@ -45,8 +49,6 @@ public class Table {
     public int Double(){
         bet *= 2;
         player.add(logic.getCard());
-        playerTurn = false;
-        dealerTurn = true;
 
         return win();
     }
@@ -62,8 +64,9 @@ public class Table {
         if(getDealerValue() < 17){
             dealer.add(logic.getCard());
         }
-
-        dealerTurn = false;
+        else{
+            dealerTurn = false;
+        }
 
         return win();
     }
@@ -138,6 +141,9 @@ public class Table {
         if(playerTurn == false && dealerTurn == false && getPlayerValue() < getDealerValue()){
             return 2;
         }
+        if(playerTurn == false && dealerTurn == false && getPlayerValue() == getDealerValue()){
+            return 3;
+        }
 
         return -1;
     }
@@ -147,10 +153,13 @@ public class Table {
             return bet;
         }
         if(check() == 1){
-            return bet * 2;
+            return bet * 1;
         }
         if(check() == 2){
             return bet * -1;
+        }
+        if(check() == 3){
+            return 0;
         }
 
         return 69420;
@@ -164,10 +173,19 @@ public class Table {
         return dealerTurn;
     }
 
+    public void setDealerTurn(boolean A){
+        dealerTurn=A;
+    }
+
     public ArrayList<Card> getDealerCard(){
         return this.dealer;
     }
     public ArrayList<Card> getPlayerCard(){
         return this.player;
+    }
+
+    public void forfeit(){
+        playerTurn=false;
+        dealerTurn=false;
     }
 }

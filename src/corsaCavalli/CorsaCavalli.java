@@ -6,7 +6,14 @@ import java.awt.Font;
 import javax.swing.*;
 
 public class CorsaCavalli extends JPanel{
-    
+    // Deve essere pubblico per poter essere utilizzato da altre classi dopo
+    // l'istanziazione
+    public JLabel saldo;
+
+    // Usata dagli altri per leggere il saldo e aggiornarlo
+    public String[] userData;
+
+
     public CorsaCavalli() {
         setSize(1300, 800);
         setLocation(250, 0);
@@ -25,7 +32,7 @@ public class CorsaCavalli extends JPanel{
         add(gameArea);
 
         // Game area - Saldo
-        JLabel saldo = new JLabel("Saldo: 1000");
+        saldo = new JLabel("Saldo: 1000");
         saldo.setBounds(20, 620, 200, 30);
         saldo.setFont(new Font("Arial", Font.PLAIN, 20));
         saldo.setForeground(Color.BLACK);

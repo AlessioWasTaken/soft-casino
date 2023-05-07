@@ -1,5 +1,6 @@
 package blackJack;
 
+import java.awt.Component;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FlowLayout;
@@ -8,15 +9,26 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import backend.blackjack.*;;
+import backend.blackjack.*;
+import backend.json.JsonEdit;
 
 public class BlackJack extends JPanel{
     private String inputButton = "";
     private Table table;
     private JPanel player;
     private JPanel dealer;
+    JComboBox<String> puntata;
     private int ContaPlayer, ContaDealer;
     private JButton bottone, hit, stand, doubleButton;
+
+    private boolean firstGame=true;
+
+    // Deve essere pubblico per poter essere utilizzato da altre classi dopo
+    // l'istanziazione
+    public JLabel saldo;
+
+    // Usata dagli altri per leggere il saldo e aggiornarlo
+    public String[] userData;
     
     public BlackJack() {
         setSize(1050, 800);
@@ -35,15 +47,27 @@ public class BlackJack extends JPanel{
         gameArea.setBackground(new Color(21, 25, 28));
         add(gameArea);
 
+        dealer = new JPanel();
+        dealer.setBounds(96, 147, 828, 140);
+        dealer.setBackground(new Color(21, 25, 28));
+        gameArea.add(dealer);
+        dealer.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        
+        player = new JPanel();
+        player.setBounds(96, 377, 828, 140);
+        player.setBackground(new Color(21, 25, 28));
+        gameArea.add(player);
+        player.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
         // Game area - Saldo
-        JLabel saldo = new JLabel("Saldo: 1000");
+        saldo = new JLabel("Saldo: 1000");
         saldo.setBounds(20, 620, 200, 30);
         saldo.setFont(new Font("Arial", Font.PLAIN, 20));
         saldo.setForeground(Color.BLACK);
         add(saldo);
 
         // Game area - Puntata
-        JComboBox<String> puntata = new JComboBox<String>();
+        puntata = new JComboBox<String>();
         puntata.setBounds(20, 660, 200, 30);
         puntata.setFont(new Font("Arial", Font.PLAIN, 20));
         puntata.setForeground(Color.BLACK);
@@ -67,41 +91,52 @@ public class BlackJack extends JPanel{
         bottone.setFocusPainted(false);
         bottone.setBorder(null);
         bottone.addActionListener(e ->{
-            if(puntata.getSelectedIndex() == 0){
-              System.out.println("Seleziona la puntata");
-            }else{
-                table = new Table(Integer.parseInt(puntata.getSelectedItem().toString()));
-                table.deal();
-
-                enable(true);
+            if (puntata.getSelectedItem().toString().equals("0")) {
+                JOptionPane.showMessageDialog(gameArea, "Seleziona una puntata", "Warning", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (JsonEdit.readSaldo(userData[0], userData[1]) == 0) {
+                    JOptionPane.showMessageDialog(gameArea, "Non hai abbastanza soldi", "Warning",
+                            JOptionPane.WARNING_MESSAGE);
+                } else {
+                    if (JsonEdit.readSaldo(userData[0], userData[1]) < Double
+                            .parseDouble(puntata.getSelectedItem().toString())) {
+                        JOptionPane.showMessageDialog(gameArea, "Non hai abbastanza soldi", "Warning",
+                                JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        if (firstGame != true) {
+                            // rimuove le JLabel vecchie, se funziona.
+                            remove();
+                        }else {
+                            firstGame = false;
+                        }
+    
+                        table = new Table(Integer.parseInt(puntata.getSelectedItem().toString()));
+                        table.deal();
+    
+                        enable(true);
+                        
+                        ContaDealer=2;
+                        ContaPlayer=2;
                 
-                ContaDealer=2;
-                ContaPlayer=2;
-
-                dealer = new JPanel();
-                dealer.setBounds(96, 147, 828, 140);
-                dealer.setBackground(new Color(21, 25, 28));
-                gameArea.add(dealer);
-                dealer.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-                
-                player = new JPanel();
-                player.setBounds(96, 377, 828, 140);
-                player.setBackground(new Color(21, 25, 28));
-                gameArea.add(player);
-                player.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        
-                for(int i = 0; i<table.getDealerCard().size(); i++){
-                    dealer.add(table.getDealerCard().get(i));
-                }
-                for(int i = 0; i<table.getPlayerCard().size(); i++){
-                    player.add(table.getPlayerCard().get(i));
-                }
-
-                gameArea.revalidate();
-
-                if(table.getDealerValue()==21 || table.getPlayerValue()==21){
-                    table.win();
-                    enable(false);
+                        for(int i = 0; i<table.getDealerCard().size(); i++){
+                            dealer.add(table.getDealerCard().get(i));
+                            dealer.repaint();
+                            dealer.revalidate();
+                        }
+                        for(int i = 0; i<table.getPlayerCard().size(); i++){
+                            player.add(table.getPlayerCard().get(i));
+                            player.repaint();
+                            player.revalidate();
+                        }
+    
+                        gameArea.repaint();
+                        gameArea.revalidate();
+    
+                        if(table.getDealerValue()==21 || table.getPlayerValue()==21){
+                            result(table.win());
+                            enable(false);
+                        }
+                    }
                 }
             }
         });
@@ -119,11 +154,12 @@ public class BlackJack extends JPanel{
             int win=table.hitPlayer();
             player.add(table.getPlayerCard().get(ContaPlayer));
             ContaPlayer++;
-            if(win!=69420){
-                //aggiungere metodo per modificare il saldo
+            player.repaint();
+            player.revalidate();
+            if(win!=69420 && table.getPlayerValue()>=21){
+                result(win);
                 enable(false);
             }
-            gameArea.revalidate();
         });
         add(hit);
 
@@ -137,15 +173,22 @@ public class BlackJack extends JPanel{
         stand.setBorder(null);
         stand.addActionListener(e ->{
             table.stand();
+            int win;
             while(table.getDealerValue()<17){
-                int win=table.hitDealer();
-                dealer.add(table.getPlayerCard().get(ContaDealer));
-                ContaDealer++;
-                if(win!=69420){
-                    //aggiungere metodo per modificare il saldo
-                    enable(false);
+                if(table.getDealerValue()>table.getPlayerValue()){
+                    break;
                 }
-                gameArea.revalidate();
+                win=table.hitDealer();
+                dealer.add(table.getDealerCard().get(ContaDealer));
+                ContaDealer++;
+                dealer.repaint();
+                dealer.revalidate();
+            }
+            table.setDealerTurn(false);
+            win=table.win();
+            if(win!=69420){
+                result(win);
+                enable(false);
             }
         });
         add(stand);
@@ -159,7 +202,23 @@ public class BlackJack extends JPanel{
         doubleButton.setFocusPainted(false);
         doubleButton.setBorder(null);
         doubleButton.addActionListener(e ->{
-            table.Double();
+            Double saldoReaded = JsonEdit.readSaldo(userData[0], userData[1]);
+            if(saldoReaded<table.getbet()*2){
+                JOptionPane.showMessageDialog(gameArea, "Non hai abbastanza soldi", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                int win=table.Double();
+                player.add(table.getPlayerCard().get(ContaPlayer));
+                ContaPlayer++;
+                player.repaint();
+                player.revalidate();
+                if(win!=69420 && table.getPlayerValue()>=21){
+                    result(win);
+                    enable(false);
+                }
+                hit.setEnabled(false);
+                doubleButton.setEnabled(false);
+            }
         });
         add(doubleButton);
 
@@ -186,5 +245,40 @@ public class BlackJack extends JPanel{
         else{
             bottone.setEnabled(false);
         }
+    }
+
+    public void remove(){
+        Component[] components = player.getComponents();
+        for (Component component : components) {
+            if (component instanceof JLabel) {
+                player.remove(component);
+                player.repaint();
+                player.revalidate();
+            }
+        }
+
+        components = dealer.getComponents();
+        for (Component component : components) {
+            if (component instanceof JLabel) {
+                dealer.remove(component);
+                dealer.repaint();
+                dealer.revalidate();
+            }
+        }
+    }
+
+    public void result(int win){
+        if(win==0){
+            JOptionPane.showMessageDialog(null, "Hai Pareggiato","Result", JOptionPane.INFORMATION_MESSAGE);
+        }else if (win > 0) {
+            JOptionPane.showMessageDialog(null, "Hai vinto " + win + " Monete", "Result", JOptionPane.INFORMATION_MESSAGE);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Hai perso " + win + " Monete", "Result", JOptionPane.INFORMATION_MESSAGE);
+        }
+        Double saldoReaded = JsonEdit.readSaldo(userData[0], userData[1]);
+        saldoReaded += win;
+        JsonEdit.writeSaldo(userData[0], userData[1], saldoReaded);
+        saldo.setText("Saldo: " + saldoReaded);
     }
 }

@@ -38,6 +38,9 @@ public class SlotMachine extends JPanel {
     // Bottone per giocare
     private JButton bottone;
 
+    // Box con le varie puntate
+    JComboBox<String> puntata;
+
     // Timer per le animazioni e per la vincita
     private Timer timer, timerVincita;
 
@@ -118,7 +121,7 @@ public class SlotMachine extends JPanel {
         add(saldo);
 
         // Game area - Puntata
-        JComboBox<String> puntata = new JComboBox<String>();
+        puntata = new JComboBox<String>();
         puntata.setBounds(20, 660, 200, 30);
         puntata.setFont(new Font("Arial", Font.PLAIN, 20));
         puntata.setForeground(Color.BLACK);
@@ -233,29 +236,21 @@ public class SlotMachine extends JPanel {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 if (win > 0) {
-                                    JOptionPane.showMessageDialog(null, "Hai vinto " + win + " Monete", "Result",
-                                            JOptionPane.INFORMATION_MESSAGE);
-                                    Double saldoReaded = JsonEdit.readSaldo(userData[0], userData[1]);
-                                    saldoReaded += Double.parseDouble(puntata.getSelectedItem().toString());
-                                    JsonEdit.writeSaldo(userData[0], userData[1], saldoReaded);
-                                    saldo.setText("Saldo: " + saldoReaded);
-                                    timerVincita.stop();
+                                    JOptionPane.showMessageDialog(null, "Hai vinto " + win + " Monete", "Result", JOptionPane.INFORMATION_MESSAGE);
+                                    
                                 } else {
-                                    JOptionPane.showMessageDialog(null, "Hai perso " + win + " Monete", "Result",
-                                            JOptionPane.INFORMATION_MESSAGE);
-                                    Double saldoReaded = JsonEdit.readSaldo(userData[0], userData[1]);
-                                    saldoReaded -= Double.parseDouble(puntata.getSelectedItem().toString());
-                                    JsonEdit.writeSaldo(userData[0], userData[1], saldoReaded);
-                                    saldo.setText("Saldo: " + saldoReaded);
-                                    timerVincita.stop();
+                                    JOptionPane.showMessageDialog(null, "Hai perso " + win + " Monete", "Result", JOptionPane.INFORMATION_MESSAGE);
                                 }
+                                Double saldoReaded = JsonEdit.readSaldo(userData[0], userData[1]);
+                                saldoReaded += win;
+                                JsonEdit.writeSaldo(userData[0], userData[1], saldoReaded);
+                                saldo.setText("Saldo: " + saldoReaded);
+                                enable();
+                                timerVincita.stop();
                             }
                         });
-
+                        
                         timerVincita.start();
-
-                        // Abilita il pulsante
-                        enable();
                     }
                 }
             }
@@ -319,8 +314,10 @@ public class SlotMachine extends JPanel {
     public void enable() {
         if (bottone.isEnabled()) {
             bottone.setEnabled(false);
+            puntata.setEnabled(false);
         } else {
             bottone.setEnabled(true);
+            puntata.setEnabled(true);
         }
     }
 

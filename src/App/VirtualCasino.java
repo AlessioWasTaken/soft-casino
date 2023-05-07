@@ -18,6 +18,7 @@ public class VirtualCasino extends JFrame{
 	private CorsaCavalli corsaCavalli = new CorsaCavalli();
 	private BlackJack blackJack = new BlackJack();
 	private String isSelected = "";
+	String[] userData;
 	
 	public VirtualCasino() {
 		super("Il Casino Virtuale");
@@ -79,6 +80,7 @@ public class VirtualCasino extends JFrame{
 		slotMachine.setVisible(false);
 		corsaCavalli.setVisible(false);
 		blackJack.setVisible(false);
+		shop.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
 	}
 
 	public void setSlotMachine() {
@@ -87,6 +89,7 @@ public class VirtualCasino extends JFrame{
 		slotMachine.setVisible(true);
 		corsaCavalli.setVisible(false);
 		blackJack.setVisible(false);
+		slotMachine.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
 	}
 
 	public void setCorsaCavalli() {
@@ -95,6 +98,7 @@ public class VirtualCasino extends JFrame{
 		slotMachine.setVisible(false);
 		corsaCavalli.setVisible(true);
 		blackJack.setVisible(false);
+		corsaCavalli.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
 	}
 
 	public void setBlackJack() {
@@ -103,6 +107,7 @@ public class VirtualCasino extends JFrame{
 		slotMachine.setVisible(false);
 		corsaCavalli.setVisible(false);
 		blackJack.setVisible(true);
+		blackJack.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
 	}
 
 	public String getIsSelected() {
@@ -111,14 +116,17 @@ public class VirtualCasino extends JFrame{
 	
 	public void setEmail(String email) {
 		menu.user.setText(JsonEdit.getUser(email));
-		String[] userData = menu.user.getText().split(" ");
+		userData = menu.user.getText().split(" ");
 		slotMachine.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
 		slotMachine.userData = userData;
+		blackJack.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
+		blackJack.userData = userData;
+		corsaCavalli.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
+		corsaCavalli.userData = userData;
 		shop.userData = userData;
 		shop.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])));
 	}
 	public static void main(String[] args) {
 		new VirtualCasino();
 	}
-
 }
