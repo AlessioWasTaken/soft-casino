@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Pista extends Thread{
     private Cavallo primo, secondo, terzo, quarto, quinto;
     Thread primoT, secondoT, terzoT, quartoT, quintoT;
+    String Winner;
+    boolean Alive=true;
 
     public Pista(){
         primo = new Cavallo();
@@ -13,55 +15,64 @@ public class Pista extends Thread{
         quarto = new Cavallo();
         quinto = new Cavallo();
 
-        primoT = new Thread(primo);
-        secondoT = new Thread(secondo);
-        terzoT = new Thread(terzo);
-        quartoT = new Thread(quarto);
-        quintoT = new Thread(quinto);
+        primoT = new Thread(primo, "1");
+        secondoT = new Thread(secondo, "2");
+        terzoT = new Thread(terzo, "3");
+        quartoT = new Thread(quarto, "4");
+        quintoT = new Thread(quinto, "5");
     }
 
     public void run(){
-
+        primoT.start();
+        secondoT.start();
+        terzoT.start();
+        quartoT.start();
+        quintoT.start();
         setPriority(MAX_PRIORITY);
 
         while(primoT.isAlive() && secondoT.isAlive() && terzoT.isAlive() && quartoT.isAlive() && quintoT.isAlive()){}
 
         System.out.println("Cavallo");
 
-        if(primoT.isAlive() == false){
+        if(primoT.isAlive() == false && Alive==true){
             try {
                 wait(1000);
             } catch (Exception e) {}
 
-            System.out.println(primoT.getId());
+            Winner=primoT.getName();
+            Alive=false;
         }
-        else if(secondoT.isAlive() == false){
+        else if(secondoT.isAlive() == false && Alive==true){
             try {
                 wait(1000);
             } catch (Exception e) {}
 
-            System.out.println(secondoT.getId());
+            Winner=secondoT.getName();
+            Alive=false;
         }
         else if(terzoT.isAlive() == false){
             try {
                 wait(1000);
             } catch (Exception e) {}
 
-            System.out.println(terzoT.getId());
+            Winner=terzoT.getName();
+            Alive=false;
         }
-        else if(quartoT.isAlive() == false){
+        else if(quartoT.isAlive() == false && Alive==true){
             try {
                 wait(1000);
             } catch (Exception e) {}
 
-            System.out.println(quartoT.getId());
+            Winner=quartoT.getName();
+            Alive=false;
         }
-        else if(quintoT.isAlive() == false){
+        else if(quintoT.isAlive() == false && Alive==true){
             try {
                 wait(1000);
             } catch (Exception e) {}
 
-            System.out.println(quintoT.getId());
+            Winner=quintoT.getName();
+            Alive=false;
         }
     }
 
