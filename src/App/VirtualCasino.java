@@ -1,132 +1,174 @@
 package App;
-import javax.swing.*;
 
-// Local imports
+import Menu.Menu;
 import auth.Access;
 import backend.json.JsonEdit;
-import shopPage.Shop;
-import Menu.Menu;
-import slotMachine.SlotMachine;
-import corsaCavalli.CorsaCavalli;
 import blackJack.BlackJack;
+import corsaCavalli.CorsaCavalli;
+import shopPage.Shop;
+import slotMachine.SlotMachine;
 
-public class VirtualCasino extends JFrame{
-	private Access access = new Access(this);
-	private Menu menu = new Menu(this);	
-	private Shop shop = new Shop();
-	private SlotMachine slotMachine = new SlotMachine(menu);
-	private CorsaCavalli corsaCavalli = new CorsaCavalli();
-	private BlackJack blackJack = new BlackJack();
-	private String isSelected = "";
-	String[] userData;
-	
-	public VirtualCasino() {
-		super("Il Casino Virtuale");
-		setSize(1300, 800);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setResizable(false);
-		setLayout(null);
-		init();
+import javax.swing.*;
 
-		setVisible(true);
-	}
-	
-	public void init() {
-		// Aggiunta del pannello di login
-		this.getContentPane().add(access);
+/**
+ * These projects simulate a Casino width 3 games
+ * - Slot Machine
+ * - Horse Run
+ * - Black Jack
+ * this file is Core of Virtual Casino. it calls any part of casino and pass instance or a data in to other component classes
+ *
+ * @author Alessio Sarica, Maurizio Napoli, Jiamin Miao, Cristian Stringari
+ * @version 1.0.0
+ * @link <a href="https://github.com/AlessioDevv/Virtual-Casino">GitHub Code</a>
+ * @since 10-05-2023
+ */
+public class VirtualCasino extends JFrame {
+    private final Access access = new Access(this);
+    private final Menu menu = new Menu(this);
+    private final Shop shop = new Shop();
+    private final SlotMachine slotMachine = new SlotMachine();
+    private final CorsaCavalli corsaCavalli = new CorsaCavalli();
+    private final BlackJack blackJack = new BlackJack();
+    private String isSelected = "";
+    String[] userData;
 
-		// Aggiunta del pannello di menu
-		menu = new Menu(this);
-		menu.setVisible(false);
-		this.getContentPane().add(menu);
+    /**
+     * This constructor create a frame and setting base option and delegate to style the method init()
+     */
+    public VirtualCasino() {
+        super("The Virtual Casino");
+        setSize(1300, 800);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        setLayout(null);
+        init();
 
+        setVisible(true);
+    }
 
-		shop.setVisible(false);
-		this.getContentPane().add(shop);
+    /**
+     * This method used automatically when you call a constructor.
+     * The scope is generated any component of page Es. JLabel with style, Class Menu...
+     */
+    public void init() {
+        // Settings of panels
+        menu.setVisible(false);
+        shop.setVisible(false);
+        slotMachine.setVisible(false);
+        corsaCavalli.setVisible(false);
+        blackJack.setVisible(false);
 
-		slotMachine.setVisible(false);
-		this.getContentPane().add(slotMachine);
+        // Add panels to Frame
+        this.getContentPane().add(access);
+        this.getContentPane().add(menu);
+        this.getContentPane().add(shop);
+        this.getContentPane().add(slotMachine);
+        this.getContentPane().add(corsaCavalli);
+        this.getContentPane().add(blackJack);
+    }
 
-		corsaCavalli.setVisible(false);
-		this.getContentPane().add(corsaCavalli);
+    /**
+     * This method setting visible menu and hide component Access in auth
+     */
+    public void login() {
+        access.setVisible(false);
+        menu.setVisible(true);
+        shop.setVisible(false);
+        slotMachine.setVisible(false);
+        corsaCavalli.setVisible(false);
+        blackJack.setVisible(false);
 
-		blackJack.setVisible(false);
-		this.getContentPane().add(blackJack);
-	}
+    }
 
-	public void login(){
-		access.setVisible(false);
-		menu.setVisible(true);
-		shop.setVisible(false);
-		slotMachine.setVisible(false);
-		corsaCavalli.setVisible(false);
-		blackJack.setVisible(false);
-		
-	}
+    /**
+     * This method setting visible the component Access in auth and other component to hide
+     */
+    public void logout() {
+        access.setVisible(true);
+        menu.setVisible(false);
+        shop.setVisible(false);
+        slotMachine.setVisible(false);
+        corsaCavalli.setVisible(false);
+        blackJack.setVisible(false);
+    }
 
-	public void logout(){
-		access.setVisible(true);
-		menu.setVisible(false);
-		shop.setVisible(false);
-		slotMachine.setVisible(false);
-		corsaCavalli.setVisible(false);
-		blackJack.setVisible(false);
-	}
+    /**
+     * This method setting visible the component Shop in shop and other components to hide
+     * then setting the credit of user in a JLabel public with JSON Method passing user authentication
+     */
+    public void setShop() {
+        isSelected = "shop";
+        shop.setVisible(true);
+        slotMachine.setVisible(false);
+        corsaCavalli.setVisible(false);
+        blackJack.setVisible(false);
+        shop.saldo.setText("Saldo: " + JsonEdit.readSaldo(userData[0], userData[1]) + " Fish");
+        shop.userData = userData;
+    }
 
-	public void setShop() {
-		isSelected = "shop";
-		shop.setVisible(true);
-		slotMachine.setVisible(false);
-		corsaCavalli.setVisible(false);
-		blackJack.setVisible(false);
-		shop.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
-	}
+    /**
+     * This method setting visible Slot Machine component in slotMachine and other components to hide
+     * Then setting credit of user in a JLabel public with JSON Method passing user authentication
+     */
+    public void setSlotMachine() {
+        isSelected = "slotMachine";
+        shop.setVisible(false);
+        slotMachine.setVisible(true);
+        corsaCavalli.setVisible(false);
+        blackJack.setVisible(false);
+        slotMachine.saldo.setText("Saldo: " + JsonEdit.readSaldo(userData[0], userData[1]) + " Fish");
+        slotMachine.userData = userData;
+    }
 
-	public void setSlotMachine() {
-		isSelected = "slotMachine";
-		shop.setVisible(false);
-		slotMachine.setVisible(true);
-		corsaCavalli.setVisible(false);
-		blackJack.setVisible(false);
-		slotMachine.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
-	}
+    /**
+     * This method setting visible the component CorsaCavalli in corsaCavalli and other to hide
+     * Then set in a JLabel public the credit of user with JSON Method passing user authentication
+     */
+    public void setCorsaCavalli() {
+        isSelected = "corsaCavalli";
+        shop.setVisible(false);
+        slotMachine.setVisible(false);
+        corsaCavalli.setVisible(true);
+        blackJack.setVisible(false);
+        corsaCavalli.saldo.setText("Saldo: " + JsonEdit.readSaldo(userData[0], userData[1]) + " Fish");
+        corsaCavalli.userData = userData;
+    }
 
-	public void setCorsaCavalli() {
-		isSelected = "corsaCavalli";
-		shop.setVisible(false);
-		slotMachine.setVisible(false);
-		corsaCavalli.setVisible(true);
-		blackJack.setVisible(false);
-		corsaCavalli.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
-	}
+    /**
+     * This method setting visible the BlackJack component in blackJack and other component to hide
+     * Then set the coin of user to a public JLabel wit JSON Method passing user authentication
+     */
+    public void setBlackJack() {
+        isSelected = "blackJack";
+        shop.setVisible(false);
+        slotMachine.setVisible(false);
+        corsaCavalli.setVisible(false);
+        blackJack.setVisible(true);
+        blackJack.saldo.setText("Saldo: " + JsonEdit.readSaldo(userData[0], userData[1]) + " Fish");
+        blackJack.userData = userData;
+    }
 
-	public void setBlackJack() {
-		isSelected = "blackJack";
-		shop.setVisible(false);
-		slotMachine.setVisible(false);
-		corsaCavalli.setVisible(false);
-		blackJack.setVisible(true);
-		blackJack.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
-	}
+    /**
+     * This method return what component is selected
+     *
+     * @return string of name the component
+     */
+    public String getIsSelected() {
+        return isSelected;
+    }
 
-	public String getIsSelected() {
-		return isSelected;
-	}
-	
-	public void setEmail(String email) {
-		menu.user.setText(JsonEdit.getUser(email));
-		userData = menu.user.getText().split(" ");
-		slotMachine.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
-		slotMachine.userData = userData;
-		blackJack.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FiashCoin");
-		blackJack.userData = userData;
-		corsaCavalli.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
-		corsaCavalli.userData = userData;
-		shop.userData = userData;
-		shop.saldo.setText("Saldo: "+ String.valueOf(JsonEdit.readSaldo(userData[0], userData[1])) + " FishCoin");
-	}
-	public static void main(String[] args) {
-		new VirtualCasino();
-	}
+    /**
+     * This method called at login passing the email of user and repave full name used to authenticate of JSON Method
+     *
+     * @param email passing an email when user access to the app
+     */
+    public void setEmail(String email) {
+        menu.user.setText(JsonEdit.getUser(email));
+        userData = menu.user.getText().split(" ");
+    }
+
+    public static void main(String[] args) {
+        new VirtualCasino();
+    }
 }

@@ -1,54 +1,31 @@
 package slotMachine;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.Timer;
-import javax.swing.border.LineBorder;
-
-import Menu.Menu;
 import backend.Slot.Immagine;
 import backend.Slot.Logica;
 import backend.json.JsonEdit;
 
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.util.Objects;
+
+/**
+ * This custom component manage a Slot machine game and connected to Virtual Casino File
+ */
 public class SlotMachine extends JPanel {
-    // Deve essere pubblico per poter essere utilizzato da altre classi dopo
-    // l'istanziazione
     public JLabel saldo;
-
-    // Usata dagli altri per leggere il saldo e aggiornarlo
     public String[] userData;
-
-    // Logica delle slot
-    private Logica logica = new Logica();
-
-    // Pannelli per le immagini
     private JPanel SlidingImage, SlidingImage2, SlidingImage3;
-
-    // Bottone per giocare
-    private JButton bottone;
-
-    // Box con le varie puntate
+    private JButton play;
     JComboBox<String> puntata;
-
-    // Timer per le animazioni e per la vincita
     private Timer timer, timerVincita;
-
-    // Array di immagini
     private Immagine[][] img;
-
     private boolean firstGame = true;
 
-    public SlotMachine(Menu istanzaMenu) {
+    /**
+     * This constructor create a basic setting of this component and delegate style to method init()
+     */
+    public SlotMachine() {
         setSize(1050, 800);
         setLocation(250, 0);
         setLayout(null);
@@ -57,6 +34,9 @@ public class SlotMachine extends JPanel {
         init();
     }
 
+    /**
+     * This method manage style of internal components
+     */
     private void init() {
         // Game area
         JPanel gameArea = new JPanel();
@@ -69,14 +49,13 @@ public class SlotMachine extends JPanel {
         JPanel Slot = new JPanel();
         Slot.setBackground(new Color(21, 25, 28));
         Slot.setBounds(225, 10, 600, 584);
-        gameArea.add(Slot);
         Slot.setBorder(new LineBorder(Color.white, 2));
         Slot.setLayout(new GridLayout(1, 3, 10, 10));
+        gameArea.add(Slot);
 
         // Game area - Slot - Lane1
         JPanel Lane_1 = new JPanel();
         Lane_1.setBackground(new Color(21, 25, 28));
-        Slot.add(Lane_1);
         Lane_1.setLayout(null);
 
         // Game area - Slot - Images
@@ -85,32 +64,33 @@ public class SlotMachine extends JPanel {
         SlidingImage.setBounds(10, -564, 173, 1128);
         Lane_1.add(SlidingImage);
         SlidingImage.setLayout(new GridLayout(6, 1, 10, 10));
+        Slot.add(Lane_1);
 
         // Game area - Slot - Lane2
         JPanel Lane_2 = new JPanel();
         Lane_2.setBackground(new Color(21, 25, 28));
-        Slot.add(Lane_2);
         Lane_2.setLayout(null);
 
         // Game area - Slot - Images
         SlidingImage2 = new JPanel();
         SlidingImage2.setBackground(new Color(21, 25, 28));
         SlidingImage2.setBounds(10, -564, 173, 1128);
-        Lane_2.add(SlidingImage2);
         SlidingImage2.setLayout(new GridLayout(6, 1, 10, 10));
+        Lane_2.add(SlidingImage2);
+        Slot.add(Lane_2);
 
         // Game area - Slot - Lane3
         JPanel Lane_3 = new JPanel();
         Lane_3.setBackground(new Color(21, 25, 28));
-        Slot.add(Lane_3);
         Lane_3.setLayout(null);
 
         // Game area - Slot - Images
         SlidingImage3 = new JPanel();
         SlidingImage3.setBackground(new Color(21, 25, 28));
         SlidingImage3.setBounds(10, -564, 173, 1128);
-        Lane_3.add(SlidingImage3);
         SlidingImage3.setLayout(new GridLayout(6, 1, 10, 10));
+        Lane_3.add(SlidingImage3);
+        Slot.add(Lane_3);
 
         // Game area - Saldo
         saldo = new JLabel("Saldo: ");
@@ -120,7 +100,7 @@ public class SlotMachine extends JPanel {
         add(saldo);
 
         // Game area - Puntata
-        puntata = new JComboBox<String>();
+        puntata = new JComboBox<>();
         puntata.setBounds(20, 660, 200, 30);
         puntata.setFont(new Font("Arial", Font.PLAIN, 20));
         puntata.setForeground(Color.BLACK);
@@ -140,127 +120,107 @@ public class SlotMachine extends JPanel {
         puntata.addItem("100000");
         add(puntata);
 
-        // Game area - Bottone
-        bottone = new JButton("Gioca");
-        bottone.setBounds(320, 630, 200, 50);
-        bottone.setFont(new Font("Arial", Font.PLAIN, 20));
-        bottone.setForeground(Color.WHITE);
-        bottone.setBackground(new Color(21, 25, 28));
-        bottone.setFocusPainted(false);
-        bottone.setBorder(null);
-        add(bottone);
-        bottone.addActionListener(e -> {
-            if (puntata.getSelectedItem().toString().equals("0")) {
+        // Game area - Play button
+        play = new JButton("Gioca");
+        play.setBounds(320, 630, 200, 50);
+        play.setFont(new Font("Arial", Font.PLAIN, 20));
+        play.setForeground(Color.WHITE);
+        play.setBackground(new Color(21, 25, 28));
+        play.setFocusPainted(false);
+        play.setBorder(null);
+        play.addActionListener(e -> {
+            Logica logica = new Logica();
+            if (Objects.requireNonNull(puntata.getSelectedItem()).toString().equals("0")) {
                 JOptionPane.showMessageDialog(Slot, "Seleziona una puntata", "Warning", JOptionPane.WARNING_MESSAGE);
             } else {
-                if (JsonEdit.readSaldo(userData[0], userData[1]) == 0) {
+                if (JsonEdit.readSaldo(userData[0], userData[1]) == 0 || JsonEdit.readSaldo(userData[0], userData[1]) < Double
+                        .parseDouble(puntata.getSelectedItem().toString())) {
                     JOptionPane.showMessageDialog(Slot, "Non hai abbastanza soldi", "Warning",
                             JOptionPane.WARNING_MESSAGE);
                 } else {
-                    if (JsonEdit.readSaldo(userData[0], userData[1]) < Double
-                            .parseDouble(puntata.getSelectedItem().toString())) {
-                        JOptionPane.showMessageDialog(Slot, "Non hai abbastanza soldi", "Warning",
-                                JOptionPane.WARNING_MESSAGE);
+                    setStatus();
+
+                    // Imposta la posizione dell immagini
+                    SlidingImage.setLocation(SlidingImage.getX(), -564);
+                    SlidingImage2.setLocation(SlidingImage2.getX(), -564);
+                    SlidingImage3.setLocation(SlidingImage3.getX(), -564);
+
+                    // Se non è la prima partita rimuove le JLabel vecchie
+                    if (!firstGame) {
+                        remove();
                     } else {
-                        // quando inizia la partità disabilita il pulsante
-                        enable();
+                        firstGame = false;
+                    }
 
-                        // Imposta la posizione
-                        SlidingImage.setLocation(SlidingImage.getX(), -564);
-                        SlidingImage2.setLocation(SlidingImage2.getX(), -564);
-                        SlidingImage3.setLocation(SlidingImage3.getX(), -564);
+                    logica.Genera();
 
-                        // Se non è la prima partita rimuove le JLabel vecchie
-                        if (firstGame != true) {
-                            // rimuove le JLabel vecchie, se funziona.
-                            remove();
+                    logica.setScommessa(Integer.parseInt(puntata.getSelectedItem().toString()));
+
+                    // Imposta le immagini
+                    img = logica.getNumeri();
+                    addImage();
+                    timer = new Timer(1, e1 -> {
+                        if (SlidingImage.getY() >= 11) {
+                            SlidingImage.setLocation(SlidingImage.getX(), 11);
                         } else {
-                            firstGame = false;
+                            SlidingImage.setLocation(SlidingImage.getX(), SlidingImage.getY() + 10);
                         }
 
-                        // genera i numeri
-                        logica.Genera();
+                        // Ricarica le immagini
+                        SlidingImage.repaint();
+                        SlidingImage.revalidate();
 
-                        // imposta la scommessa
+                        if (SlidingImage2.getY() >= 11) {
+                            SlidingImage2.setLocation(SlidingImage2.getX(), 11);
+                        } else {
+                            SlidingImage2.setLocation(SlidingImage2.getX(), SlidingImage2.getY() + 9);
+                        }
 
-                        logica.setScommessa((int) Integer.parseInt(puntata.getSelectedItem().toString()));
+                        // Ricarica le immagini
+                        SlidingImage2.repaint();
+                        SlidingImage2.revalidate();
 
-                        // Impota le immagini
-                        img = logica.getNumeri();
+                        if (SlidingImage3.getY() >= 11) {
+                            SlidingImage3.setLocation(SlidingImage3.getX(), 11);
+                            timer.stop();
+                        } else {
+                            SlidingImage3.setLocation(SlidingImage3.getX(), SlidingImage3.getY() + 8);
+                        }
 
-                        // aggiunge i componenti all'interno dei pannelli mobili
-                        Aggiunta();
+                        // Ricarica le immagini
+                        SlidingImage3.repaint();
+                        SlidingImage3.revalidate();
+                    });
+                    timer.start();
 
-                        // avvia il timer
-                        timer = new Timer(1, new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                // aggiorna la posizione dello slider 1
-                                if (SlidingImage.getY() >= 11) {
-                                    SlidingImage.setLocation(SlidingImage.getX(), 11);
-                                } else {
-                                    SlidingImage.setLocation(SlidingImage.getX(), SlidingImage.getY() + 10);
-                                }
+                    // Controlla se hai vinto
+                    int win = logica.Win();
+                    timerVincita = new Timer(2000, e12 -> {
+                        if (win > 0) {
+                            JOptionPane.showMessageDialog(null, "Hai vinto " + win + " Monete", "Result", JOptionPane.INFORMATION_MESSAGE);
 
-                                // Ricarica le immagini
-                                SlidingImage.repaint();
-                                SlidingImage.revalidate();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Hai perso " + win + " Monete", "Result", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                        double saldoRead = JsonEdit.readSaldo(userData[0], userData[1]);
+                        saldoRead += win;
+                        JsonEdit.writeSaldo(userData[0], userData[1], saldoRead);
+                        saldo.setText("Saldo: " + saldoRead + " Fish");
+                        setStatus();
+                        timerVincita.stop();
+                    });
 
-                                // aggiorna la posizione dello slider 2
-                                if (SlidingImage2.getY() >= 11) {
-                                    SlidingImage2.setLocation(SlidingImage2.getX(), 11);
-                                } else {
-                                    SlidingImage2.setLocation(SlidingImage2.getX(), SlidingImage2.getY() + 9);
-                                }
-
-                                // Ricarica le immagini
-                                SlidingImage2.repaint();
-                                SlidingImage2.revalidate();
-
-                                // aggiorna la posizione dello slider 3
-                                if (SlidingImage3.getY() >= 11) {
-                                    SlidingImage3.setLocation(SlidingImage3.getX(), 11);
-                                    timer.stop();
-                                } else {
-                                    SlidingImage3.setLocation(SlidingImage3.getX(), SlidingImage3.getY() + 8);
-                                }
-
-                                // Ricarica le immagini
-                                SlidingImage3.repaint();
-                                SlidingImage3.revalidate();
-                            }
-                        });
-                        timer.start();
-
-                        // Controlla se hai vinto
-                        int win = logica.Win();
-
-                        // Timer per il risultato che parte dopo che lo slider si è fermato
-                        timerVincita = new Timer(2000, new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                if (win > 0) {
-                                    JOptionPane.showMessageDialog(null, "Hai vinto " + win + " Monete", "Result", JOptionPane.INFORMATION_MESSAGE);
-                                    
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Hai perso " + win + " Monete", "Result", JOptionPane.INFORMATION_MESSAGE);
-                                }
-                                Double saldoReaded = JsonEdit.readSaldo(userData[0], userData[1]);
-                                saldoReaded += win;
-                                JsonEdit.writeSaldo(userData[0], userData[1], saldoReaded);
-                                saldo.setText("Saldo: " + saldoReaded + " FishCoin");
-                                enable();
-                                timerVincita.stop();
-                            }
-                        });
-                        
-                        timerVincita.start();
-                    }
+                    timerVincita.start();
                 }
             }
+
         });
+        add(play);
     }
 
+    /**
+     * This method remove components before start a new game
+     */
     public void remove() {
         Component[] components = SlidingImage.getComponents();
         for (Component component : components) {
@@ -290,22 +250,17 @@ public class SlotMachine extends JPanel {
         }
     }
 
-    public void Aggiunta() {
-        for (int i = 0; i < img.length; i++) {
-            for (int j = 0; j < img[i].length; j++) {
-                if (img[i][j] != null) {
+    /**
+     * This method add images to grid of Slot on gui
+     */
+    public void addImage() {
+        for (Immagine[] immagines : img) {
+            for (int j = 0; j < immagines.length; j++) {
+                if (immagines[j] != null) {
                     switch (j + 1) {
-                        case 1:
-                            SlidingImage.add(img[i][j]);
-                            break;
-
-                        case 2:
-                            SlidingImage2.add(img[i][j]);
-                            break;
-
-                        case 3:
-                            SlidingImage3.add(img[i][j]);
-                            break;
+                        case 1 -> SlidingImage.add(immagines[j]);
+                        case 2 -> SlidingImage2.add(immagines[j]);
+                        case 3 -> SlidingImage3.add(immagines[j]);
                     }
                 }
                 SlidingImage.repaint();
@@ -315,17 +270,16 @@ public class SlotMachine extends JPanel {
         }
     }
 
-    public void enable() {
-        if (bottone.isEnabled()) {
-            bottone.setEnabled(false);
+    /**
+     * This method disable or enable button if game is started or not
+     */
+    public void setStatus() {
+        if (play.isEnabled()) {
+            play.setEnabled(false);
             puntata.setEnabled(false);
         } else {
-            bottone.setEnabled(true);
+            play.setEnabled(true);
             puntata.setEnabled(true);
         }
-    }
-
-    public void setUserData(String[] userData) {
-        this.userData = userData;
     }
 }

@@ -1,28 +1,25 @@
 package shopPage;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-
-import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import backend.json.JsonEdit;
 
-public class Shop extends JPanel{
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseListener;
+import java.util.Objects;
+
+/**
+ * This custom component manage Shop of fish
+ */
+public class Shop extends JPanel {
     private int isSelected = 0;
     public String[] userData;
     public JLabel saldo;
-    JPanel pacchetto1, pacchetto2, pacchetto3;
+    private JPanel pacchetto1, pacchetto2, pacchetto3;
 
-
+    /**
+     * This constructor create a basic setting of this component and delegate style to init() method
+     */
     public Shop() {
         setSize(1050, 800);
         setLocation(250, 0);
@@ -32,8 +29,11 @@ public class Shop extends JPanel{
         init();
     }
 
+    /**
+     * This method manage style of internal components
+     */
     private void init() {
-        // Titolo
+        // Title
         JLabel titolo = new JLabel("Seleziona un pacchetto");
         titolo.setBounds(0, 10, 1050, 800);
         titolo.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -68,18 +68,18 @@ public class Shop extends JPanel{
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent e) {
-                
+
             }
 
             @Override
             public void mouseEntered(java.awt.event.MouseEvent e) {
-                
+
             }
 
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
             }
-        }); 
+        });
 
         // Titolo pacchetto
         JLabel titoloPacchetto = new JLabel("Starter");
@@ -90,25 +90,24 @@ public class Shop extends JPanel{
         titoloPacchetto.setForeground(Color.white);
         pacchetto1.add(titoloPacchetto);
 
-        // Icona pacchetto
-        JLabel iconaPacchetto = new JLabel();
-        iconaPacchetto.setBounds(20, 50, 250, 250);
+        // Icon pacchetto
+        JLabel iconPacchetto = new JLabel();
+        iconPacchetto.setBounds(20, 50, 250, 250);
         try {
-            Image img = ImageIO.read(getClass().getResource("../assets/starter.png")).getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-            iconaPacchetto.setIcon(new ImageIcon(img));
-        } catch (Exception ex) {
-            System.out.println(ex);
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("../assets/starter.png"))).getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            iconPacchetto.setIcon(new ImageIcon(img));
+        } catch (Exception ignored) {
         }
-        pacchetto1.add(iconaPacchetto);
+        pacchetto1.add(iconPacchetto);
 
-        // Quantità
-        JLabel quantita = new JLabel("30 Fish");
-        quantita.setBounds(30, 300, 290, 50);
-        quantita.setFont(new Font("Arial", Font.PLAIN, 20));
-        quantita.setHorizontalAlignment(JLabel.LEFT);
-        quantita.setVerticalAlignment(JLabel.TOP);
-        quantita.setForeground(Color.white);
-        pacchetto1.add(quantita);
+        // quantity
+        JLabel quantity = new JLabel("30 Fish");
+        quantity.setBounds(30, 300, 290, 50);
+        quantity.setFont(new Font("Arial", Font.PLAIN, 20));
+        quantity.setHorizontalAlignment(JLabel.LEFT);
+        quantity.setVerticalAlignment(JLabel.TOP);
+        quantity.setForeground(Color.white);
+        pacchetto1.add(quantity);
 
         // Prezzo pacchetto
         JLabel prezzoPacchetto = new JLabel("€ 10.99");
@@ -139,12 +138,12 @@ public class Shop extends JPanel{
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent e) {
-                
+
             }
 
             @Override
             public void mouseEntered(java.awt.event.MouseEvent e) {
-                
+
             }
 
             @Override
@@ -161,25 +160,24 @@ public class Shop extends JPanel{
         titoloPacchetto2.setForeground(Color.white);
         pacchetto2.add(titoloPacchetto2);
 
-        // Icona pacchetto
-        JLabel iconaPacchetto2 = new JLabel();
-        iconaPacchetto2.setBounds(20, 50, 250, 250);
+        // Icon pacchetto
+        JLabel iconPacchetto2 = new JLabel();
+        iconPacchetto2.setBounds(20, 50, 250, 250);
         try {
-            Image img = ImageIO.read(getClass().getResource("../assets/pro.png")).getScaledInstance(250, 250, Image.SCALE_SMOOTH);
-            iconaPacchetto2.setIcon(new ImageIcon(img));
-        } catch (Exception ex) {
-            System.out.println(ex);
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("../assets/pro.png"))).getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+            iconPacchetto2.setIcon(new ImageIcon(img));
+        } catch (Exception ignored) {
         }
-        pacchetto2.add(iconaPacchetto2);
+        pacchetto2.add(iconPacchetto2);
 
-        // Quantità
-        JLabel quantita2 = new JLabel("100 Fish");
-        quantita2.setBounds(30, 300, 290, 50);
-        quantita2.setFont(new Font("Arial", Font.PLAIN, 20));
-        quantita2.setHorizontalAlignment(JLabel.LEFT);
-        quantita2.setVerticalAlignment(JLabel.TOP);
-        quantita2.setForeground(Color.white);
-        pacchetto2.add(quantita2);
+        // Quantity
+        JLabel quantity2 = new JLabel("100 Fish");
+        quantity2.setBounds(30, 300, 290, 50);
+        quantity2.setFont(new Font("Arial", Font.PLAIN, 20));
+        quantity2.setHorizontalAlignment(JLabel.LEFT);
+        quantity2.setVerticalAlignment(JLabel.TOP);
+        quantity2.setForeground(Color.white);
+        pacchetto2.add(quantity2);
 
         // Prezzo pacchetto
         JLabel prezzoPacchetto2 = new JLabel("€ 29.99");
@@ -231,25 +229,24 @@ public class Shop extends JPanel{
         titoloPacchetto3.setForeground(Color.white);
         pacchetto3.add(titoloPacchetto3);
 
-        // Icona pacchetto
-        JLabel iconaPacchetto3 = new JLabel();
-        iconaPacchetto3.setBounds(20, 50, 250, 250);
+        // Icon pacchetto
+        JLabel iconPacchetto3 = new JLabel();
+        iconPacchetto3.setBounds(20, 50, 250, 250);
         try {
-            Image img = ImageIO.read(getClass().getResource("../assets/premium.png")).getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-            iconaPacchetto3.setIcon(new ImageIcon(img));
-        } catch (Exception ex) {
-            System.out.println(ex);
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("../assets/premium.png"))).getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            iconPacchetto3.setIcon(new ImageIcon(img));
+        } catch (Exception ignored) {
         }
-        pacchetto3.add(iconaPacchetto3);
+        pacchetto3.add(iconPacchetto3);
 
-        // Quantità
-        JLabel quantita3 = new JLabel("300 Fish");
-        quantita3.setBounds(30, 300, 290, 50);
-        quantita3.setFont(new Font("Arial", Font.PLAIN, 20));
-        quantita3.setHorizontalAlignment(JLabel.LEFT);
-        quantita3.setVerticalAlignment(JLabel.TOP);
-        quantita3.setForeground(Color.white);
-        pacchetto3.add(quantita3);
+        // Quantity
+        JLabel quantity3 = new JLabel("300 Fish");
+        quantity3.setBounds(30, 300, 290, 50);
+        quantity3.setFont(new Font("Arial", Font.PLAIN, 20));
+        quantity3.setHorizontalAlignment(JLabel.LEFT);
+        quantity3.setVerticalAlignment(JLabel.TOP);
+        quantity3.setForeground(Color.white);
+        pacchetto3.add(quantity3);
 
         // Prezzo pacchetto
         JLabel prezzoPacchetto3 = new JLabel("€ 49.99");
@@ -260,32 +257,27 @@ public class Shop extends JPanel{
         pacchetto3.add(prezzoPacchetto3);
         add(pacchetto3);
 
-        // Bottone acquista
+        // Buy button
         JButton acquista = new JButton("Acquista");
         acquista.setBounds(350, 550, 290, 50);
         acquista.setFont(new Font("Arial", Font.PLAIN, 20));
         acquista.setBackground(new Color(21, 25, 28));
         acquista.setForeground(Color.white);
         acquista.setBorder(BorderFactory.createLineBorder(Color.white));
-        acquista.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Double saldoAttuale = JsonEdit.readSaldo(userData[0], userData[1]);
-                switch(isSelected){
-                    case 1:
-                        JsonEdit.writeSaldo(userData[0], userData[1], saldoAttuale + Double.parseDouble(quantita.getText().split(" ")[0]));
-                        saldo.setText("Saldo: "+JsonEdit.readSaldo(userData[0], userData[1]) + " Fish");
-                    break;
-
-                    case 2:
-                        JsonEdit.writeSaldo(userData[0], userData[1], saldoAttuale + Double.parseDouble(quantita2.getText().split(" ")[0]));
-                        saldo.setText("Saldo: "+JsonEdit.readSaldo(userData[0], userData[1]) + " Fish");
-                    break;
-
-                    case 3:
-                        JsonEdit.writeSaldo(userData[0], userData[1], saldoAttuale + Double.parseDouble(quantita3.getText().split(" ")[0]));
-                        saldo.setText("Saldo: "+JsonEdit.readSaldo(userData[0], userData[1]) + " Fish");
-                    break;
+        acquista.addActionListener(e -> {
+            double saldoAttuale = JsonEdit.readSaldo(userData[0], userData[1]);
+            switch (isSelected) {
+                case 1 -> {
+                    JsonEdit.writeSaldo(userData[0], userData[1], saldoAttuale + Double.parseDouble(quantity.getText().split(" ")[0]));
+                    saldo.setText("Saldo: " + JsonEdit.readSaldo(userData[0], userData[1]) + " Fish");
+                }
+                case 2 -> {
+                    JsonEdit.writeSaldo(userData[0], userData[1], saldoAttuale + Double.parseDouble(quantity2.getText().split(" ")[0]));
+                    saldo.setText("Saldo: " + JsonEdit.readSaldo(userData[0], userData[1]) + " Fish");
+                }
+                case 3 -> {
+                    JsonEdit.writeSaldo(userData[0], userData[1], saldoAttuale + Double.parseDouble(quantity3.getText().split(" ")[0]));
+                    saldo.setText("Saldo: " + JsonEdit.readSaldo(userData[0], userData[1]) + " Fish");
                 }
             }
         });
