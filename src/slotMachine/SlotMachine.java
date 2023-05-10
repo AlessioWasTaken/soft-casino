@@ -133,6 +133,11 @@ public class SlotMachine extends JPanel {
         puntata.addItem("500");
         puntata.addItem("1000");
         puntata.addItem("2000");
+        puntata.addItem("5000");
+        puntata.addItem("10000");
+        puntata.addItem("25000");
+        puntata.addItem("50000");
+        puntata.addItem("100000");
         add(puntata);
 
         // Game area - Bottone

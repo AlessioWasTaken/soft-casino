@@ -11,7 +11,7 @@ public class Cavallo extends JLabel implements Runnable{
     int speed;
     int position;
     int reactionTime;
-    ImageIcon[] icons = new ImageIcon[7];
+    ImageIcon[] icons = new ImageIcon[6];
 
     public Cavallo(){
         speed = (int)(Math.random()*10) + 1;
@@ -23,8 +23,8 @@ public class Cavallo extends JLabel implements Runnable{
         this.setBackground(Color.red);
         
         for (int i = 0; i < icons.length; i++) {
-            int p = i+1;
-            ImageIcon img = new ImageIcon("src/assets/HorseAnimation/Horse"+p+".gif");
+            int j=i+1;
+            ImageIcon img = new ImageIcon("src/assets/HorseAnimation/Horse"+j+".gif");
             Image image = img.getImage();
             Image imgScaled = image.getScaledInstance(150, 120, Image.SCALE_SMOOTH);
             ImageIcon scaledIcon = new ImageIcon(imgScaled);
@@ -43,27 +43,26 @@ public class Cavallo extends JLabel implements Runnable{
         }catch(InterruptedException e){
             e.printStackTrace();
         }
-        while(position < 840){
-            position += speed;
-            //System.out.println("Cavallo " + this.getId() + " in posizione " + position);
+        while(position < 800){
             if(counter == 3){
                 speed();
                 counter = 0;
             }
+            position += speed;
             this.setLocation(position, this.getY());
-            this.setIcon(icons[(imageCounter%7)]);
-            imageCounter++;
+            this.setIcon(icons[imageCounter%6]);
             this.repaint();
             this.revalidate();
             try {
-                Thread.sleep(25);
+                Thread.sleep(40);
                 counter++;
+                imageCounter++;
             } catch (Exception e) {}
         }
     }
 
     public void speed(){
-        speed = (int)(Math.random()*6) + 1;
+        speed = (int)(Math.random()*15) + 1;
     }
 
     public int getPosition(){

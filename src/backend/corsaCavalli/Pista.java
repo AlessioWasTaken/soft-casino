@@ -20,6 +20,12 @@ public class Pista extends Thread{
         terzoT = new Thread(terzo, "3");
         quartoT = new Thread(quarto, "4");
         quintoT = new Thread(quinto, "5");
+
+        primoT.setPriority(6);
+        secondoT.setPriority(6);
+        terzoT.setPriority(6);
+        quartoT.setPriority(6);
+        quintoT.setPriority(6);
     }
 
     public void run(){
@@ -31,8 +37,6 @@ public class Pista extends Thread{
         setPriority(MAX_PRIORITY);
 
         while(primoT.isAlive() && secondoT.isAlive() && terzoT.isAlive() && quartoT.isAlive() && quintoT.isAlive()){}
-
-        System.out.println("Cavallo");
 
         if(primoT.isAlive() == false && Alive==true){
             try {
@@ -84,5 +88,13 @@ public class Pista extends Thread{
         cav.add(quarto);
         cav.add(quinto);
         return cav;
+    }
+
+    public boolean status(){
+        return Alive;
+    }
+
+    public String Win(){
+        return Winner;
     }
 }
