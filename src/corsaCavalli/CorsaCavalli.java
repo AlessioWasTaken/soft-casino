@@ -197,9 +197,9 @@ public class CorsaCavalli extends JPanel{
                         timerVincita = new Timer(5000, new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                double win=Double.parseDouble(puntata.getSelectedItem().toString());;
+                                int win=Integer.parseInt(puntata.getSelectedItem().toString());;
                                 if(pista.Win().equals(numeroCavalli.getSelectedItem())){
-                                    win= win*1.2f;
+                                    win= win*1;
                                 }
                                 else{
                                     win=win*-1;
