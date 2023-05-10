@@ -15,7 +15,7 @@ public class Cavallo extends JLabel implements Runnable{
 
     public Cavallo(){
         speed = (int)(Math.random()*10) + 1;
-        position = 0;
+        position = 10;
         reactionTime = (int)(Math.random()*25) + 1;
 
         this.setSize(150, 120);
@@ -43,7 +43,7 @@ public class Cavallo extends JLabel implements Runnable{
         }catch(InterruptedException e){
             e.printStackTrace();
         }
-        while(position < 800){
+        while(position < 850){
             if(counter == 3){
                 speed();
                 counter = 0;

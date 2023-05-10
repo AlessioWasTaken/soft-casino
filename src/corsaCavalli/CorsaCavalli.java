@@ -103,9 +103,13 @@ public class CorsaCavalli extends JPanel{
                         }else{
                             remove();
                         }
-            
+                        
+                        JLabel Number1=new JLabel("1");
+                        Number1.setBounds(0, 50, 10, 10);
+                        Number1.setFont(new Font("Arial", Font.PLAIN, 15));
+                        Number1.setForeground(Color.WHITE);
                         JPanel Border1=new JPanel();
-                        Border1.setBounds(940, 0, 1, 120);
+                        Border1.setBounds(850, 0, 1, 120);
                         Border1.setBorder(new MatteBorder(new Insets(0, 0, 2, 2), Color.white));
                         p1 = new JPanel();
                         p1.setBackground(new Color(21, 25, 28));
@@ -114,10 +118,16 @@ public class CorsaCavalli extends JPanel{
                         p1.setBorder(new MatteBorder(new Insets(0, 0, 2, 2), Color.white));
                         p1.add(pista.getCavallo().get(0));
                         p1.add(Border1);
+                        p1.add(Number1);
                         gameArea.add(p1);
             
+
+                        JLabel Number2=new JLabel("2");
+                        Number2.setBounds(0, 50, 10, 10);
+                        Number2.setFont(new Font("Arial", Font.PLAIN, 15));
+                        Number2.setForeground(Color.WHITE);
                         JPanel Border2=new JPanel();
-                        Border2.setBounds(940, 0, 1, 120);
+                        Border2.setBounds(850, 0, 1, 120);
                         Border2.setBorder(new MatteBorder(new Insets(0, 0, 2, 2), Color.white));
                         p2 = new JPanel();
                         p2.setBackground(new Color(21, 25, 28));
@@ -126,10 +136,16 @@ public class CorsaCavalli extends JPanel{
                         p2.setBorder(new MatteBorder(new Insets(0, 0, 2, 2), Color.white));
                         p2.add(pista.getCavallo().get(1));
                         p2.add(Border2);
+                        p2.add(Number2);
                         gameArea.add(p2);
             
+
+                        JLabel Number3=new JLabel("3");
+                        Number3.setBounds(0, 50, 10, 10);
+                        Number3.setFont(new Font("Arial", Font.PLAIN, 15));
+                        Number3.setForeground(Color.WHITE);
                         JPanel Border3=new JPanel();
-                        Border3.setBounds(940, 0, 1, 120);
+                        Border3.setBounds(850, 0, 1, 120);
                         Border3.setBorder(new MatteBorder(new Insets(0, 0, 2, 2), Color.white));
                         p3 = new JPanel();
                         p3.setBackground(new Color(21, 25, 28));
@@ -138,10 +154,16 @@ public class CorsaCavalli extends JPanel{
                         p3.setBorder(new MatteBorder(new Insets(0, 0, 2, 2), Color.white));
                         p3.add(pista.getCavallo().get(2));
                         p3.add(Border3);
+                        p3.add(Number3);
                         gameArea.add(p3);
                         
+
+                        JLabel Number4=new JLabel("4");
+                        Number4.setBounds(0, 50, 10, 10);
+                        Number4.setFont(new Font("Arial", Font.PLAIN, 15));
+                        Number4.setForeground(Color.WHITE);
                         JPanel Border4=new JPanel();
-                        Border4.setBounds(940, 0, 1, 120);
+                        Border4.setBounds(850, 0, 1, 120);
                         Border4.setBorder(new MatteBorder(new Insets(0, 0, 2, 2), Color.white));
                         p4 = new JPanel();
                         p4.setBackground(new Color(21, 25, 28));
@@ -150,10 +172,16 @@ public class CorsaCavalli extends JPanel{
                         p4.setBorder(new MatteBorder(new Insets(0, 0, 2, 2), Color.white));
                         p4.add(pista.getCavallo().get(3));
                         p4.add(Border4);
+                        p4.add(Number4);
                         gameArea.add(p4);
                         
+
+                        JLabel Number5=new JLabel("5");
+                        Number5.setBounds(0, 50, 10, 10);
+                        Number5.setFont(new Font("Arial", Font.PLAIN, 15));
+                        Number5.setForeground(Color.WHITE);
                         JPanel Border5=new JPanel();
-                        Border5.setBounds(940, 0, 1, 120);
+                        Border5.setBounds(850, 0, 1, 120);
                         Border5.setBorder(new MatteBorder(new Insets(0, 0, 2, 2), Color.white));
                         p5 = new JPanel();
                         p5.setBackground(new Color(21, 25, 28));
@@ -162,19 +190,16 @@ public class CorsaCavalli extends JPanel{
                         p5.setBorder(new MatteBorder(new Insets(0, 0, 2, 2), Color.white));
                         p5.add(pista.getCavallo().get(4));
                         p5.add(Border5);
-                        p5.revalidate();
-                        p5.repaint();
+                        p5.add(Number5);
                         gameArea.add(p5);
-            
-            
                         pista.start();
             
                         timerVincita = new Timer(5000, new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                int win=Integer.parseInt(puntata.getSelectedItem().toString());;
+                                double win=Double.parseDouble(puntata.getSelectedItem().toString());;
                                 if(pista.Win().equals(numeroCavalli.getSelectedItem())){
-                                    win=win*1;
+                                    win= win*1.2f;
                                 }
                                 else{
                                     win=win*-1;

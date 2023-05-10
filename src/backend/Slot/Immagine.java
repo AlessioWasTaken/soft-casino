@@ -13,8 +13,8 @@ public class Immagine extends JLabel{
 	public Immagine() {
 		super();
 		Num = (int) ((Math.random() * 6) + 1);
-		int chance=(int)(Math.random() * 69420 + 1);
-		if(chance== 1) {
+		int chance=(int)(Math.random() * 200 + 1);
+		if(chance==1) {
 			Num=69420;
 		}
 		this.setSize(173, 180);

@@ -64,10 +64,10 @@ public class Logica{
 		//Schema a V 2
 		if(Numeri[2][0].getNum()==Numeri[1][1].getNum() && Numeri[2][0].getNum()==Numeri[2][2].getNum())
 			Vincite=Vincite+1;
-		for(int i=0;i<Numeri.length;i++) {
+		for(int i=0;i<3;i++) {
 			for(int y=0;y<Numeri[i].length;y++) {
 				if(Numeri[i][y].getNum()==69420) {
-					Vincite=Vincite+1000;
+					Vincite=Vincite+10;
 				}
 			}
 		}
