@@ -31,3 +31,6 @@ This project si a virtual version of casino and contain black jack, slot machine
 |-- JavaDock/
 |-- README.md
 ```
+
+## Documentation
+Link a (Java Dock)[JavaDoc/index.html]
