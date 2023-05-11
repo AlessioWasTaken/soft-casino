@@ -19,8 +19,8 @@ import javax.swing.*;
  * It calls any part of casino and pass instance or data in to other component classes
  *
  * @author Alessio Sarica, Maurizio Napoli, Jiamin Miao, Cristian Stringari
+ * <a href="https://github.com/AlessioDevv/Virtual-Casino">GitHub Code</a>
  * @version 1.0.0
- * @link <a href="https://github.com/AlessioDevv/Virtual-Casino">GitHub Code</a>
  * @since 10-05-2023
  */
 public class VirtualCasino extends JFrame {
