@@ -8,7 +8,8 @@ import java.awt.*;
 import java.util.Objects;
 
 /**
- * This custom component Represent a Black Jack game with internal component connected to backend file in package: backend.blackjack
+ * This custom component Represents a Black Jack game with an internal component connected to backend file in package:
+ * backend.blackjack
  */
 public class BlackJack extends JPanel {
     private Table table;
@@ -261,7 +262,7 @@ public class BlackJack extends JPanel {
     }
 
     /**
-     * This method remove component on table after play
+     * This method removes component on table after play
      */
     public void remove() {
         Component[] components = player.getComponents();
@@ -284,7 +285,7 @@ public class BlackJack extends JPanel {
     }
 
     /**
-     * This method is used to calculate result of match and refresh credit e Pop-up message of result
+     * This method is used to calculate a result of match and refresh credit re a Pop-up message of a result
      *
      * @param win is parameter to specific value 0 == Pareggio, >0 == Vinto other == Perso
      */

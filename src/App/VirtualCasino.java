@@ -15,7 +15,8 @@ import javax.swing.*;
  * - Slot Machine
  * - Horse Run
  * - Black Jack
- * this file is Core of Virtual Casino. it calls any part of casino and pass instance or a data in to other component classes
+ * this file is Core of Virtual Casino.
+ * It calls any part of casino and pass instance or data in to other component classes
  *
  * @author Alessio Sarica, Maurizio Napoli, Jiamin Miao, Cristian Stringari
  * @version 1.0.0
@@ -33,7 +34,7 @@ public class VirtualCasino extends JFrame {
     String[] userData;
 
     /**
-     * This constructor create a frame and setting base option and delegate to style the method init()
+     * This constructor creates a frame and setting a base option and delegate to style the method init()
      */
     public VirtualCasino() {
         super("The Virtual Casino");
@@ -82,7 +83,7 @@ public class VirtualCasino extends JFrame {
     }
 
     /**
-     * This method setting visible the component Access in auth and other component to hide
+     * This method setting visible the component Access in auth and another component to hide
      */
     public void logout() {
         access.setVisible(true);
@@ -108,7 +109,7 @@ public class VirtualCasino extends JFrame {
     }
 
     /**
-     * This method setting visible Slot Machine component in slotMachine and other components to hide
+     * This method setting a visible Slot Machine component in slotMachine and other components to hide
      * Then setting credit of user in a JLabel public with JSON Method passing user authentication
      */
     public void setSlotMachine() {
@@ -136,7 +137,7 @@ public class VirtualCasino extends JFrame {
     }
 
     /**
-     * This method setting visible the BlackJack component in blackJack and other component to hide
+     * This method setting visible the BlackJack component in blackJack and another component to hide
      * Then set the coin of user to a public JLabel wit JSON Method passing user authentication
      */
     public void setBlackJack() {

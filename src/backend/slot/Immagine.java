@@ -1,4 +1,4 @@
-package backend.Slot;
+package backend.slot;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,9 +7,15 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+/**
+ * This class used to create image of symbol on slot machine grid extending a JLabel
+ */
 public class Immagine extends JLabel{
 	private int Num;
 
+	/**
+	 * This constructor generates an image for grid
+	 */
 	public Immagine() {
 		super();
 		Num = (int) ((Math.random() * 6) + 1);
@@ -28,11 +34,11 @@ public class Immagine extends JLabel{
         this.setIcon(scaledIcon);
 	}
 
+	/**
+	 * This method returns a number of images
+	 * @return int of image number
+	 */
 	public int getNum() {
 		return Num;
-	}
-
-	public void setNum(int num) {
-		Num = num;
 	}
 }

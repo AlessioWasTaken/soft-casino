@@ -1,4 +1,4 @@
-package backend.Slot;
+package backend.slot;
 
 public class Logica{
 	private Immagine [][] Numeri;

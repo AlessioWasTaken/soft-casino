@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.Objects;
 
 /**
- * This custom component contain a menu section of app it connected to Virtual Casino
+ * This custom component contains a menu section of app it connected to Virtual Casino
  */
 public class Menu extends JPanel {
     private final VirtualCasino istanceApp;
@@ -17,7 +17,7 @@ public class Menu extends JPanel {
     /**
      * This constructor create a basic setting of component and delegate style to method init()
      *
-     * @param istanceApp is a reference to Virtual Casino file and used to manage other component
+     * @param istanceApp is a reference to Virtual Casino file and used to manage another component
      */
     public Menu(VirtualCasino istanceApp) {
         this.istanceApp = istanceApp;
@@ -29,7 +29,7 @@ public class Menu extends JPanel {
     }
 
     /**
-     * This method create a style of internal component
+     * This method creates a style of internal component
      */
     public void init() {
         // App Logo

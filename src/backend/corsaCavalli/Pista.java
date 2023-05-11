@@ -1,14 +1,29 @@
 package backend.corsaCavalli;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
-public class Pista extends Thread{
-    private Cavallo primo, secondo, terzo, quarto, quinto;
-    Thread primoT, secondoT, terzoT, quartoT, quintoT;
-    String Winner;
-    boolean Alive=true;
+/**
+ * This class used to create a logic
+ */
+public class Pista extends Thread {
+    private final Cavallo primo;
+    private final Cavallo secondo;
+    private final Cavallo terzo;
+    private final Cavallo quarto;
+    private final Cavallo quinto;
+    private final Thread primoT;
+    private final Thread secondoT;
+    private final Thread terzoT;
+    private final Thread quartoT;
+    private final Thread quintoT;
+    private String Winner;
+    private boolean Alive = true;
 
-    public Pista(){
+    /**
+     * This constructor prepares horse and creates thread for any horse
+     */
+    public Pista() {
         primo = new Cavallo();
         secondo = new Cavallo();
         terzo = new Cavallo();
@@ -28,7 +43,10 @@ public class Pista extends Thread{
         quintoT.setPriority(6);
     }
 
-    public void run(){
+    /**
+     * This is a method run for thread to use to playing a game
+     */
+    public void run() {
         primoT.start();
         secondoT.start();
         terzoT.start();
@@ -36,51 +54,54 @@ public class Pista extends Thread{
         quintoT.start();
         setPriority(MAX_PRIORITY);
 
-        while(primoT.isAlive() && secondoT.isAlive() && terzoT.isAlive() && quartoT.isAlive() && quintoT.isAlive()){}
+        while (Stream.of(primoT, secondoT, terzoT, quartoT, quintoT).allMatch(Thread::isAlive)) {
 
-        if(primoT.isAlive() == false && Alive==true){
-            try {
-                wait(1000);
-            } catch (Exception e) {}
-
-            Winner=primoT.getName();
-            Alive=false;
         }
-        else if(secondoT.isAlive() == false && Alive==true){
+
+        if (!primoT.isAlive() && Alive) {
             try {
                 wait(1000);
-            } catch (Exception e) {}
+            } catch (Exception ignored) {
+            }
 
-            Winner=secondoT.getName();
-            Alive=false;
-        }
-        else if(terzoT.isAlive() == false){
+            Winner = primoT.getName();
+            Alive = false;
+        } else if (!secondoT.isAlive() && Alive) {
             try {
                 wait(1000);
-            } catch (Exception e) {}
+            } catch (Exception ignored) {
+            }
 
-            Winner=terzoT.getName();
-            Alive=false;
-        }
-        else if(quartoT.isAlive() == false && Alive==true){
+            Winner = secondoT.getName();
+            Alive = false;
+        } else if (!terzoT.isAlive()) {
             try {
                 wait(1000);
-            } catch (Exception e) {}
+            } catch (Exception ignored) {
+            }
 
-            Winner=quartoT.getName();
-            Alive=false;
-        }
-        else if(quintoT.isAlive() == false && Alive==true){
+            Winner = terzoT.getName();
+            Alive = false;
+        } else if (!quartoT.isAlive() && Alive) {
             try {
                 wait(1000);
-            } catch (Exception e) {}
+            } catch (Exception ignored) {
+            }
 
-            Winner=quintoT.getName();
-            Alive=false;
+            Winner = quartoT.getName();
+            Alive = false;
+        } else if (!quintoT.isAlive() && Alive) {
+            try {
+                wait(1000);
+            } catch (Exception ignored) {
+            }
+
+            Winner = quintoT.getName();
+            Alive = false;
         }
     }
 
-    public ArrayList<Cavallo> getCavallo(){
+    public ArrayList<Cavallo> getCavallo() {
         ArrayList<Cavallo> cav = new ArrayList<>();
         cav.add(primo);
         cav.add(secondo);
@@ -90,11 +111,7 @@ public class Pista extends Thread{
         return cav;
     }
 
-    public boolean status(){
-        return Alive;
-    }
-
-    public String Win(){
+    public String Win() {
         return Winner;
     }
 }

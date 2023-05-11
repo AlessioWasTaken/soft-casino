@@ -30,7 +30,7 @@ public class Shop extends JPanel {
     }
 
     /**
-     * This method manage style of internal components
+     * This method manages the style of internal components
      */
     private void init() {
         // Title

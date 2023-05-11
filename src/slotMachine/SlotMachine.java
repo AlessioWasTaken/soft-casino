@@ -1,7 +1,7 @@
 package slotMachine;
 
-import backend.Slot.Immagine;
-import backend.Slot.Logica;
+import backend.slot.Immagine;
+import backend.slot.Logica;
 import backend.json.JsonEdit;
 
 import javax.swing.*;
@@ -10,7 +10,7 @@ import java.awt.*;
 import java.util.Objects;
 
 /**
- * This custom component manage a Slot machine game and connected to Virtual Casino File
+ * This custom component manages a Slot machine game and connected to Virtual Casino File
  */
 public class SlotMachine extends JPanel {
     public JLabel saldo;
@@ -23,7 +23,7 @@ public class SlotMachine extends JPanel {
     private boolean firstGame = true;
 
     /**
-     * This constructor create a basic setting of this component and delegate style to method init()
+     * This constructor creates a basic setting of this component and delegate style to method init()
      */
     public SlotMachine() {
         setSize(1050, 800);
@@ -35,7 +35,7 @@ public class SlotMachine extends JPanel {
     }
 
     /**
-     * This method manage style of internal components
+     * This method manages the style of internal components
      */
     private void init() {
         // Game area
@@ -219,7 +219,7 @@ public class SlotMachine extends JPanel {
     }
 
     /**
-     * This method remove components before start a new game
+     * This method removes components before start a new game
      */
     public void remove() {
         Component[] components = SlidingImage.getComponents();
@@ -251,7 +251,7 @@ public class SlotMachine extends JPanel {
     }
 
     /**
-     * This method add images to grid of Slot on gui
+     * This method adds images to the grid of Slot on gui
      */
     public void addImage() {
         for (Immagine[] immagines : img) {
@@ -271,7 +271,7 @@ public class SlotMachine extends JPanel {
     }
 
     /**
-     * This method disable or enable button if game is started or not
+     * This method disables or enables button if a game is started or not
      */
     public void setStatus() {
         if (play.isEnabled()) {

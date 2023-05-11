@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.Objects;
 
 /**
- * This custom component used to create a Horse Run game and connected to Virtual Casino
+ * This custom component used to create a Horse Run game and connected to a Virtual Casino
  */
 public class CorsaCavalli extends JPanel {
     public JLabel saldo;
@@ -22,7 +22,7 @@ public class CorsaCavalli extends JPanel {
     private boolean FirstGame = true;
 
     /**
-     * This constructor create a base settings for component Es. With, Height... and delegate style to method init()
+     * This constructor creates a base settings for component Es. With, Height... and delegate style to method init()
      */
     public CorsaCavalli() {
         setSize(1300, 800);
@@ -238,7 +238,7 @@ public class CorsaCavalli extends JPanel {
     }
 
     /**
-     * This method remove components to game area to next game
+     * This method removes components to game area to next game
      */
     public void remove() {
         Component[] components = p1.getComponents();
