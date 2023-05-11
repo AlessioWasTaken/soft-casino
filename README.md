@@ -2,7 +2,7 @@
 This project si a virtual version of casino and contain black jack, slot machine and horse run
 
 ## Site presentation
-[Clcik](alessiodevv.github.io/Virtual-Casino/)
+[Clcik](https://alessiodevv.github.io/Virtual-Casino/)
 
 ## Structure
 ```
@@ -37,4 +37,4 @@ This project si a virtual version of casino and contain black jack, slot machine
 ```
 
 ## Documentation
-Link a [Java Dock](JavaDoc/index.html)
+Link a [Java Dock](https://alessiodevv.github.io/Virtual-Casino/JavaDoc/)
