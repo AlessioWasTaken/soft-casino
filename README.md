@@ -4,7 +4,7 @@ This project si a virtual version of casino and contain black jack, slot machine
 ## Site presentation
 [Clcik](https://alessiodevv.github.io/Virtual-Casino/)
 
-##Rules
+## Rules
 - Creando un account confermi di aver raggiunto la maggior età
 - Per creare un account serve inserire la carta di credito
 - Esistono 4 sezioni
