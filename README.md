@@ -2,7 +2,7 @@
 This project si a virtual version of casino and contain black jack, slot machine and horse run
 
 ## Site presentation
-[Clcik](https://alessiodevv.github.io/Virtual-Casino/)
+[Web Site](https://alessiodevv.github.io/Virtual-Casino/)
 
 ## Rules
 - Creando un account confermi di aver raggiunto la maggior età
@@ -63,4 +63,4 @@ This project si a virtual version of casino and contain black jack, slot machine
 ```
 
 ## Documentation
-Link a [Java Dock](https://alessiodevv.github.io/Virtual-Casino/JavaDoc/)
+Link a [Java Doc](https://alessiodevv.github.io/Virtual-Casino/JavaDoc/)
