@@ -1,66 +1,33 @@
 # Virtual-Casino 
-This project si a virtual version of casino and contain black jack, slot machine and horse run
+This project is a virtual version of a casino and contains blackjack, slot machines and horse race
 
 ## Site presentation
 [Web Site](https://alessiodevv.github.io/Virtual-Casino/)
 
-## Rules
-- Creando un account confermi di aver raggiunto la maggior età
-- Per creare un account serve inserire la carta di credito
-- Esistono 4 sezioni
+## Sections
+- By creating an account you declare that you are over the age of 18
+- In order to create an account you have to insert your credit card details
+- There are 4 sections
 ```
      |-- Shop
-          |-- E' possibile effettuare l'acquisto di Fish scegliendo tra 3 pacchetti diversi
+          |-- You are able to buy Fishes by picking between 3 bundles
      |-- Slot Machine
-          |-- E' possibile effettuare la puntata nella casella apposita e attraverso il bottone gioca si fa iniziare la giocata
-               |-- Ogni vittoria equivale al raddoppio della puntata
-               |-- La vittoria é decisa da 11 combinazioni possibili
-               |-- Se si trova la testa di Shrek si ha un bonus equivalente a un x10 della puntata
-     |-- Corsa Cavalli
-          |-- E' possibile effettuare la puntata nella casella apposita, inserire nell'apposita casella il cavallo su cui si vuole scommettere e attraverso il bottone gioca si fa iniziare la partita
-               |-- In caso di vittoria la puntata verra raddoppiata e accreditata al saldo utente
+          |-- It's possible to bet in the specific box and by clicking on the "play" button you start playing
+               |-- Each win corrisponds to a doubling of the bet
+               |-- The win is decided by 11 possible combinations
+               |-- If you find Shrek's head you multiply by 10 your bet
+     |-- Horse Race
+          |-- It's possible to bet in the specific box, pick the horse you want to bet on and by clicking on th "play" button you start playing
+               |-- If you win your bet will be doubled and added to your credit
      |-- BlackJack
-          |-- É possibile effettuare la puntata attraverso l'aposita casella e premento il pulsante Gioca si darà inizio alla partita
-          |-- Durante il gioco vi è possibile effettuare delle azioni grazie ai pulsanti dedicati, come ad esempio "Hit"
-          |-- Il banco termina il turno nel momento in cui il suo valore delle carte e maggiore o uguale a 17 
-          |-- I casi di vottoria sono 2
-               |-- Se con il tuo valore delle carte superi il valore del banco fino a un massimo di 21
-               |-- Se il banco supera 21
-          |-- Si può pareggiare se il banco ha lo stesso valore di carte delle tue
-```
-- Si può effettuare il LogOut
-
-## Structure
-```
-.
-|-- lib/
-|-- out/
-|-- src/
-     |-- App/
-          |-- VirtualCasino.java
-     |-- assets/
-          |-- img, txt...
-     |-- auth/
-          |-- Access.java
-     |-- backend/
-          |-- blackJack/
-          |-- slotMachine/
-          |-- jsonEdit/
-          |-- corsaCavalli/
-          |-- auth/
-     |-- blackJack/
-          |-- BlackJack.java
-     |-- corsaCavalli/
-          |-- CorsaCavalli.java
-     |-- Menu/
-          |-- Menu.java
-     |-- shopPage/
-          |-- ShopPage.java
-     |-- slotMachine/
-          |-- SlotMachine.java
-|-- JavaDock/
-|-- README.md
+          |-- It's possible to bet in the specific box and by clicking on the "play" button you start playing
+          |-- During the match you are able to do some actons thanks to the dedicated buttons
+          |-- The dealer can end the deal if the value of his card is greater or equal to 17
+          |-- The win cases are 2:
+               |-- If the value of your cards is greater than the value of the dealer's card and is less or equal to 21
+               |-- If the dealer's card value is greater than 21
+          |-- You can spare if the value of your cards and the dealer's is equal
 ```
 
 ## Documentation
-Link a [Java Doc](https://alessiodevv.github.io/Virtual-Casino/JavaDoc/)
+Link to the [Documentation](https://alessiodevv.github.io/Virtual-Casino/JavaDoc/)
