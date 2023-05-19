@@ -26,7 +26,5 @@ This project is a virtual version of a casino and contains blackjack, slot machi
                - If the value of your cards is greater than the value of the dealer's card and is less or equal to 21
                - If the dealer's card value is greater than 21
                - You can spare if the value of your cards and the dealer's is equal
-<br>
-<br>
 ## Documentation
 Link to the [Documentation](https://alessiodevv.github.io/Virtual-Casino/JavaDoc/)
