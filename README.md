@@ -2,7 +2,7 @@
 This project is a virtual version of a casino and contains blackjack, slot machines and horse race
 
 ## Site presentation
-[Web Site](https://alessiodevv.github.io/Virtual-Casino/)
+[Web Site](https://alessiosarica.github.io/Virtual-Casino/)
 
 ## Sections
 - By creating an account you declare that you are over the age of 18
@@ -27,4 +27,4 @@ This project is a virtual version of a casino and contains blackjack, slot machi
                - If the dealer's card value is greater than 21
                - You can spare if the value of your cards and the dealer's is equal
 ## Documentation
-Link to the [Documentation](https://alessiodevv.github.io/Virtual-Casino/JavaDoc/)
+Link to the [Documentation](https://alessiosarica.github.io/Virtual-Casino/JavaDoc/)
